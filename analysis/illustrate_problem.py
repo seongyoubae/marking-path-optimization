@@ -78,8 +78,8 @@ def render_schematic():
     sequence, direction = validate_solution(problem, SOLUTION)
     ink, muted, coral, travel_color = "#242424", "#626262", "#c5463d", "#303030"
     elements = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1110" '
-        'viewBox="0 0 1280 1110" role="img" aria-labelledby="title desc">',
+        '<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1200" '
+        'viewBox="0 0 1280 1200" role="img" aria-labelledby="title desc">',
         '<title id="title">Marking operations and the travel between their endpoints</title>',
         '<desc id="desc">An original synthetic layout with four independently constructed '
         "shipbuilding-style contours. Two larger parts each contain three marking operations; "
@@ -95,7 +95,7 @@ def render_schematic():
         '</marker><marker id="mark_arrow" markerWidth="16" markerHeight="16" refX="14" '
         'refY="8" orient="auto" markerUnits="userSpaceOnUse">'
         '<path d="M1,1 L15,8 L1,15 Z" fill="#c5463d"/></marker></defs>',
-        '<rect width="1280" height="1110" fill="#fff"/>',
+        '<rect width="1280" height="1200" fill="#fff"/>',
         '<g font-family="Arial, Helvetica, sans-serif">',
     ]
 
@@ -191,29 +191,43 @@ def render_schematic():
     elements.append(f'<circle cx="{ox}" cy="{oy}" r="9" fill="{travel_color}"/>')
     text(60, 859, "O  ·  start / return", 30, travel_color, weight="bold")
     text(1212, 859, "Four parts · Eight marking operations", 29, muted, anchor="end")
-    elements.append('<line x1="48" y1="886" x2="1232" y2="886" stroke="#d5d5d5"/>')
-    text(48, 931, "Reversible direction", 32, weight="bold")
+    # Two framed panels separate direction encoding from the selected visit order.
+    for x, width, heading in [(48, 374, "Reversible direction"), (446, 786, "Example route")]:
+        elements.extend(
+            [
+                f'<rect x="{x}" y="902" width="{width}" height="238" rx="10" '
+                'fill="#f5f5f5" stroke="#a0a0a0" stroke-width="1.6"/>',
+                f'<rect x="{x}" y="902" width="{width}" height="64" rx="10" fill="#303030"/>',
+                f'<rect x="{x}" y="950" width="{width}" height="16" fill="#303030"/>',
+            ]
+        )
+        text(x + 20, 945, heading, 30, "#fff", weight="bold")
     for row, bit in enumerate([0, 1]):
-        y = 982 + row * 58
-        text(60, y, bit, 31, weight="bold")
-        text(119, y, "A", 30)
-        text(354, y, "B", 30, anchor="end")
-        a, b = ((157, y - 10), (313, y - 10))
+        y = 1031 + row * 70
+        elements.append(
+            f'<rect x="68" y="{y - 34}" width="44" height="48" rx="5" fill="#303030"/>'
+        )
+        text(90, y, bit, 31, "#fff", weight="bold", anchor="middle")
+        text(135, y, "A", 30)
+        text(396, y, "B", 30, anchor="end")
+        a, b = ((176, y - 10), (348, y - 10))
         if bit:
             a, b = b, a
         line(a, b, coral, 5.5, "mark_arrow")
-    text(455, 931, "Example route", 32, weight="bold")
-    text(455, 984, "Order", 30, weight="bold")
-    text(455, 1042, "Dir.", 30, weight="bold")
+    text(466, 1031, "Order", 30, weight="bold")
+    text(466, 1101, "Dir.", 30, weight="bold")
     for visit, (operation, bit) in enumerate(zip(sequence, direction)):
-        x = 629 + 77 * visit
-        elements.append(
-            f'<rect x="{x - 27}" y="950" width="54" height="47" rx="5" '
-            'fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>'
+        x = 636 + 77 * visit
+        elements.extend(
+            [
+                f'<rect x="{x - 28}" y="997" width="56" height="48" rx="5" fill="#303030"/>',
+                f'<rect x="{x - 28}" y="1067" width="56" height="48" rx="5" '
+                'fill="#fff" stroke="#707070" stroke-width="1.6"/>',
+            ]
         )
-        text(x, 984, int(operation) + 1, 31, weight="bold", anchor="middle")
-        text(x, 1042, int(bit), 31, weight="bold", anchor="middle")
-    text(48, 1092, "Synthetic layout · Illustrative coordinates and route", 27, muted)
+        text(x, 1031, int(operation) + 1, 31, "#fff", weight="bold", anchor="middle")
+        text(x, 1101, int(bit), 31, weight="bold", anchor="middle")
+    text(48, 1181, "Synthetic layout · Illustrative coordinates and route", 27, muted)
     elements.extend(["</g>", "</svg>"])
     return "\n".join(elements) + "\n"
 

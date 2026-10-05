@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1110" viewBox="0 0 1280 1110" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1200" viewBox="0 0 1280 1200" role="img" aria-labelledby="title desc">
 <title id="title">Marking operations and the travel between their endpoints</title>
 <desc id="desc">An original synthetic layout with four independently constructed shipbuilding-style contours. Two larger parts each contain three marking operations; two smaller brackets each contain one. Eight numbered red strokes have reversible paired endpoints. Dashed connectors show the origin approach, transfers and return. Gray contours, white numbered badges and solid versus dashed arrows distinguish the diagram elements. Red is reserved for marking strokes. The example order ends with operation eight followed by operation seven. Coordinates and route are illustrative. Contours are not collision constraints.</desc>
 <defs><marker id="travel_arrow" markerWidth="15" markerHeight="15" refX="13" refY="7.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M2,2 L13,7.5 L2,13" fill="none" stroke="#303030" stroke-width="2.5"/></marker><marker id="mark_arrow" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L15,8 L1,15 Z" fill="#c5463d"/></marker></defs>
-<rect width="1280" height="1110" fill="#fff"/>
+<rect width="1280" height="1200" fill="#fff"/>
 <g font-family="Arial, Helvetica, sans-serif">
 <text x="48" y="61" font-size="44" fill="#242424" font-weight="bold" text-anchor="start">Marking path optimization</text>
 <text x="48" y="109" font-size="30" fill="#626262" font-weight="normal" text-anchor="start">Optimize the travel between marking operations.</text>
@@ -84,43 +84,58 @@
 <circle cx="60.0" cy="815.0" r="9" fill="#303030"/>
 <text x="60" y="859" font-size="30" fill="#303030" font-weight="bold" text-anchor="start">O  ·  start / return</text>
 <text x="1212" y="859" font-size="29" fill="#626262" font-weight="normal" text-anchor="end">Four parts · Eight marking operations</text>
-<line x1="48" y1="886" x2="1232" y2="886" stroke="#d5d5d5"/>
-<text x="48" y="931" font-size="32" fill="#242424" font-weight="bold" text-anchor="start">Reversible direction</text>
-<text x="60" y="982" font-size="31" fill="#242424" font-weight="bold" text-anchor="start">0</text>
-<text x="119" y="982" font-size="30" fill="#242424" font-weight="normal" text-anchor="start">A</text>
-<text x="354" y="982" font-size="30" fill="#242424" font-weight="normal" text-anchor="end">B</text>
-<line x1="157.00" y1="972.00" x2="313.00" y2="972.00" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
-<text x="60" y="1040" font-size="31" fill="#242424" font-weight="bold" text-anchor="start">1</text>
-<text x="119" y="1040" font-size="30" fill="#242424" font-weight="normal" text-anchor="start">A</text>
-<text x="354" y="1040" font-size="30" fill="#242424" font-weight="normal" text-anchor="end">B</text>
-<line x1="313.00" y1="1030.00" x2="157.00" y2="1030.00" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
-<text x="455" y="931" font-size="32" fill="#242424" font-weight="bold" text-anchor="start">Example route</text>
-<text x="455" y="984" font-size="30" fill="#242424" font-weight="bold" text-anchor="start">Order</text>
-<text x="455" y="1042" font-size="30" fill="#242424" font-weight="bold" text-anchor="start">Dir.</text>
-<rect x="602" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
-<text x="629" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">1</text>
-<text x="629" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
-<rect x="679" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
-<text x="706" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">2</text>
-<text x="706" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
-<rect x="756" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
-<text x="783" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">3</text>
-<text x="783" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
-<rect x="833" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
-<text x="860" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">4</text>
-<text x="860" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
-<rect x="910" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
-<text x="937" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">5</text>
-<text x="937" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
-<rect x="987" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
-<text x="1014" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">6</text>
-<text x="1014" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">1</text>
-<rect x="1064" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
-<text x="1091" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">8</text>
-<text x="1091" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
-<rect x="1141" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
-<text x="1168" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">7</text>
-<text x="1168" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">1</text>
-<text x="48" y="1092" font-size="27" fill="#626262" font-weight="normal" text-anchor="start">Synthetic layout · Illustrative coordinates and route</text>
+<rect x="48" y="902" width="374" height="238" rx="10" fill="#f5f5f5" stroke="#a0a0a0" stroke-width="1.6"/>
+<rect x="48" y="902" width="374" height="64" rx="10" fill="#303030"/>
+<rect x="48" y="950" width="374" height="16" fill="#303030"/>
+<text x="68" y="945" font-size="30" fill="#fff" font-weight="bold" text-anchor="start">Reversible direction</text>
+<rect x="446" y="902" width="786" height="238" rx="10" fill="#f5f5f5" stroke="#a0a0a0" stroke-width="1.6"/>
+<rect x="446" y="902" width="786" height="64" rx="10" fill="#303030"/>
+<rect x="446" y="950" width="786" height="16" fill="#303030"/>
+<text x="466" y="945" font-size="30" fill="#fff" font-weight="bold" text-anchor="start">Example route</text>
+<rect x="68" y="997" width="44" height="48" rx="5" fill="#303030"/>
+<text x="90" y="1031" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">0</text>
+<text x="135" y="1031" font-size="30" fill="#242424" font-weight="normal" text-anchor="start">A</text>
+<text x="396" y="1031" font-size="30" fill="#242424" font-weight="normal" text-anchor="end">B</text>
+<line x1="176.00" y1="1021.00" x2="348.00" y2="1021.00" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<rect x="68" y="1067" width="44" height="48" rx="5" fill="#303030"/>
+<text x="90" y="1101" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">1</text>
+<text x="135" y="1101" font-size="30" fill="#242424" font-weight="normal" text-anchor="start">A</text>
+<text x="396" y="1101" font-size="30" fill="#242424" font-weight="normal" text-anchor="end">B</text>
+<line x1="348.00" y1="1091.00" x2="176.00" y2="1091.00" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<text x="466" y="1031" font-size="30" fill="#242424" font-weight="bold" text-anchor="start">Order</text>
+<text x="466" y="1101" font-size="30" fill="#242424" font-weight="bold" text-anchor="start">Dir.</text>
+<rect x="608" y="997" width="56" height="48" rx="5" fill="#303030"/>
+<rect x="608" y="1067" width="56" height="48" rx="5" fill="#fff" stroke="#707070" stroke-width="1.6"/>
+<text x="636" y="1031" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">1</text>
+<text x="636" y="1101" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="685" y="997" width="56" height="48" rx="5" fill="#303030"/>
+<rect x="685" y="1067" width="56" height="48" rx="5" fill="#fff" stroke="#707070" stroke-width="1.6"/>
+<text x="713" y="1031" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">2</text>
+<text x="713" y="1101" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="762" y="997" width="56" height="48" rx="5" fill="#303030"/>
+<rect x="762" y="1067" width="56" height="48" rx="5" fill="#fff" stroke="#707070" stroke-width="1.6"/>
+<text x="790" y="1031" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">3</text>
+<text x="790" y="1101" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="839" y="997" width="56" height="48" rx="5" fill="#303030"/>
+<rect x="839" y="1067" width="56" height="48" rx="5" fill="#fff" stroke="#707070" stroke-width="1.6"/>
+<text x="867" y="1031" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">4</text>
+<text x="867" y="1101" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="916" y="997" width="56" height="48" rx="5" fill="#303030"/>
+<rect x="916" y="1067" width="56" height="48" rx="5" fill="#fff" stroke="#707070" stroke-width="1.6"/>
+<text x="944" y="1031" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">5</text>
+<text x="944" y="1101" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="993" y="997" width="56" height="48" rx="5" fill="#303030"/>
+<rect x="993" y="1067" width="56" height="48" rx="5" fill="#fff" stroke="#707070" stroke-width="1.6"/>
+<text x="1021" y="1031" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">6</text>
+<text x="1021" y="1101" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">1</text>
+<rect x="1070" y="997" width="56" height="48" rx="5" fill="#303030"/>
+<rect x="1070" y="1067" width="56" height="48" rx="5" fill="#fff" stroke="#707070" stroke-width="1.6"/>
+<text x="1098" y="1031" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">8</text>
+<text x="1098" y="1101" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="1147" y="997" width="56" height="48" rx="5" fill="#303030"/>
+<rect x="1147" y="1067" width="56" height="48" rx="5" fill="#fff" stroke="#707070" stroke-width="1.6"/>
+<text x="1175" y="1031" font-size="31" fill="#fff" font-weight="bold" text-anchor="middle">7</text>
+<text x="1175" y="1101" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">1</text>
+<text x="48" y="1181" font-size="27" fill="#626262" font-weight="normal" text-anchor="start">Synthetic layout · Illustrative coordinates and route</text>
 </g>
 </svg>

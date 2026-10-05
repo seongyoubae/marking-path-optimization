@@ -34,6 +34,10 @@ Each part has two endpoints. The tool enters through one endpoint and finishes a
 
 The part coordinates are fixed inputs. The optimizer selects the route; it does not generate a nesting layout, move parts, enforce collision constraints or model machine acceleration.
 
+![Marking operations, paired endpoints and travel route](assets/problem.svg)
+
+*Illustrative route on synthetic geometry. Red arrows show marking strokes; dashed arrows show the travel objective. Figure IDs start at 1; the Python API uses zero-based IDs.*
+
 ## Solution Representation
 
 For `n` parts, a discrete candidate contains `2*n` integers:
@@ -165,7 +169,8 @@ marking-path-optimization/
 │   └── common.py
 ├── analysis/
 │   ├── statistical_test.py
-│   └── plot_route.py
+│   ├── plot_route.py
+│   └── illustrate_problem.py      # reproducible SVG schematic
 ├── data/sample/synthetic_parts.json
 ├── assets/problem.svg
 ├── docs/implementation_notes.md

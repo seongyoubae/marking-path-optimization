@@ -1,4 +1,4 @@
-"""Redraw the supplied marking schematic with readable route annotations."""
+"""Draw an original synthetic layout with multiple marking operations per part."""
 
 import argparse
 from pathlib import Path
@@ -8,77 +8,65 @@ import numpy as np
 
 from src.problem import Problem, validate_solution
 
-# Illustrative sheet coordinates preserve the supplied example's arrangement.
-# These are not original production coordinates or a dimensioned fabrication drawing.
+# Independently constructed, non-dimensional example geometry.
+# Multiple marking operations can belong to a single drawn part.
+# Contours are visual context; the solver consumes only paired endpoints.
 ENDPOINTS = [
-    (0.5, 3.5),
-    (8, 3.5),
-    (5, 21),
-    (21, 21),
-    (3, 39.3),
-    (25, 39.3),
-    (9.5, 58.5),
-    (9.5, 40.5),
-    (22, 40.5),
-    (37.5, 58.5),
-    (41.8, 58.5),
-    (46, 57),
-    (46.5, 56.2),
-    (46.5, 52.5),
-    (53.5, 56.2),
-    (53.5, 52.5),
-    (59.1, 58.5),
-    (54.2, 57),
-    (62.5, 58.5),
-    (78.5, 40.4),
-    (90.5, 58.5),
-    (90.5, 40.7),
-    (78.8, 39.3),
-    (96.5, 39.3),
-    (79.5, 21),
-    (96.5, 21),
-    (91.5, 3.2),
-    (99, 3.2),
+    (10, 9),
+    (46, 9),
+    (10, 22),
+    (10, 49),
+    (15, 55),
+    (38, 55),
+    (63, 56),
+    (109, 56),
+    (112, 54),
+    (112, 40),
+    (63, 42),
+    (108, 42),
+    (65, 9),
+    (82, 9),
+    (98, 28),
+    (114, 28),
 ]
-SOLUTION = list(range(14)) + [0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1]
-LABELS = [
-    (5, 8),
-    (12, 25),
-    (16, 35.5),
-    (5, 50),
-    (27, 52),
-    (38.5, 54),
-    (42, 50),
-    (58, 50),
-    (61.5, 54),
-    (75, 50),
-    (95, 50),
-    (87, 35.5),
-    (86, 25),
-    (94, 8),
-]
-# Gray and white contours reproduce the visual context of the research schematic.
-# They do not introduce an optimizer constraint or imply one operation per contour.
-WHITE_CONTOURS = [
-    "M47,55 L43,44 L26,44 L26,40 C26,35 31,35 31,39 L44,39 L40,25 "
-    "L23,25 L23,21 C23,16 28,16 28,20 L38,20 L29,0 L71,0 L63,20 "
-    "L75,20 C75,16 80,16 80,21 L80,25 L62,25 L58,39 L69,39 "
-    "C69,35 74,35 74,40 L74,44 L55,44 L52,55 Z",
-    "M46.2,60 L53.8,60 L53.8,58.5 C53.8,53.8 46.2,53.8 46.2,58.5 Z",
-    "M14,47.5 C8.5,47.5 8.5,56.5 14,56.5 L24,56.5 C30,56.5 30,47.5 24,47.5 Z",
-    "M76,47.5 C70,47.5 70,56.5 76,56.5 L86,56.5 C92,56.5 92,47.5 86,47.5 Z",
-]
-GRAY_CONTOURS = [
-    "M12,49.2 L25.5,49.2 L27.5,54.8 L13.5,54.8 Z",
-    "M74.5,49.2 L88,49.2 L86.5,54.8 L72.5,54.8 Z",
-    "M32.8,9 L43.8,41.7 L51.9,47.6 L55.3,38.6 L44.7,5.2 L36.4,0 Z",
-    "M44.5,10 L48.5,21 L55.5,27 L58.5,20.5 L53.5,4 L47.5,0.5 Z",
+# Directions belong to visit positions, including the final 8 -> 7 visit order.
+SOLUTION = [0, 1, 2, 3, 4, 5, 7, 6] + [0, 0, 0, 0, 0, 1, 0, 1]
+LABELS = [(49, 11), (6, 36), (31, 59.5), (78, 61.5), (117, 47), (98, 38), (76, 5.5), (100, 32)]
+PARTS = [
+    {
+        "outline": "M5,6 L53,6 L53,20 L47,20 L47,26 L35,26 L35,30 "
+        "Q30,30 30,33 Q30,36 35,36 L35,41 L43,41 L43,58 L10,58 L5,53 Z",
+        "holes": [
+            "M20,46 L29,46 A3,3 0 0 1 29,52 L20,52 A3,3 0 0 1 20,46 Z",
+            "M20,11 L35,11 A3,3 0 0 1 35,17 L20,17 A3,3 0 0 1 20,11 Z",
+        ],
+        "operations": [0, 1, 2],
+    },
+    {
+        "outline": "M57,39 L62,35 L81,35 L81,39 Q84,43 87,39 L87,35 "
+        "L110,35 L116,41 L116,59 L62,59 L57,54 Z",
+        "holes": [
+            "M68.5,45 L76.5,45 A3.5,3.5 0 0 1 76.5,52 L68.5,52 A3.5,3.5 0 0 1 68.5,45 Z",
+            "M94.5,45 L102.5,45 A3.5,3.5 0 0 1 102.5,52 L94.5,52 A3.5,3.5 0 0 1 94.5,45 Z",
+        ],
+        "operations": [3, 4, 5],
+    },
+    {
+        "outline": "M57,6 L89,6 L89,12 L65,31 L57,31 L57,10 Q62,10 62,6 Z",
+        "holes": ["M70,18 A3,3 0 1 0 64,18 A3,3 0 1 0 70,18 Z"],
+        "operations": [6],
+    },
+    {
+        "outline": "M94,31 L117,31 L117,6 L111,6 L95,23 Q94,26 94,31 Z",
+        "holes": ["M112.8,23 A2.8,2.8 0 1 0 107.2,23 A2.8,2.8 0 1 0 112.8,23 Z"],
+        "operations": [7],
+    },
 ]
 
 
 def schematic_problem():
     coords = np.asarray(ENDPOINTS, dtype=float)
-    return Problem([0, 0], coords, coords[np.arange(len(coords)) ^ 1], "reference_schematic")
+    return Problem([0, 0], coords, coords[np.arange(len(coords)) ^ 1], "synthetic_schematic")
 
 
 def render_schematic():
@@ -86,23 +74,22 @@ def render_schematic():
     sequence, direction = validate_solution(problem, SOLUTION)
     navy, muted, coral = "#153746", "#536a78", "#c93f35"
     elements = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1310" '
-        'viewBox="0 0 1280 1310" role="img" aria-labelledby="title desc">',
+        '<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1110" '
+        'viewBox="0 0 1280 1110" role="img" aria-labelledby="title desc">',
         '<title id="title">Marking operations and the travel between their endpoints</title>',
-        '<desc id="desc">A readable redraw of the supplied research schematic. Gray and '
-        "white shapes retain its visual context. Fourteen numbered red marking segments "
-        "follow the supplied arrangement, rather than placing one arbitrary stroke inside "
-        "each drawn part. Dashed navy connectors run from the origin to the first entry, "
-        "between each exit and the next entry, and back to the origin. Coordinates and "
-        "the manually selected route are illustrative, not an industrial dataset or a "
-        "reported optimizer result. Contours are not collision constraints.</desc>",
+        '<desc id="desc">An original synthetic layout with four independently constructed '
+        "shipbuilding-style contours. Two larger parts each contain three marking operations; "
+        "two smaller brackets each contain one. Eight numbered red strokes have reversible "
+        "paired endpoints. Dashed connectors show the origin approach, transfers and return. "
+        "The example order ends with operation eight followed by operation seven. Coordinates "
+        "and route are illustrative. Contours are not collision constraints.</desc>",
         '<defs><marker id="travel_arrow" markerWidth="15" markerHeight="15" refX="13" '
         'refY="7.5" orient="auto" markerUnits="userSpaceOnUse">'
         '<path d="M2,2 L13,7.5 L2,13" fill="none" stroke="#153746" stroke-width="2.5"/>'
         '</marker><marker id="mark_arrow" markerWidth="16" markerHeight="16" refX="14" '
         'refY="8" orient="auto" markerUnits="userSpaceOnUse">'
         '<path d="M1,1 L15,8 L1,15 Z" fill="#c93f35"/></marker></defs>',
-        '<rect width="1280" height="1310" fill="#fff"/>',
+        '<rect width="1280" height="1110" fill="#fff"/>',
         '<g font-family="Arial, Helvetica, sans-serif">',
     ]
 
@@ -125,36 +112,24 @@ def render_schematic():
         )
 
     def point(p):
-        return 60 + 11.52 * float(p[0]), 901.2 - 11.52 * float(p[1])
-
-    def contour(path, fill):
-        elements.append(
-            f'<path d="{path}" transform="translate(60 901.2) scale(11.52 -11.52)" '
-            f'fill="{fill}" stroke="#435f6f" stroke-width="0.2" '
-            'stroke-linejoin="round"/>'
-        )
+        return 60 + 9.6 * float(p[0]), 815 - 9.6 * float(p[1])
 
     text(48, 61, "Marking path optimization", 44, weight="bold")
-    text(48, 109, "Choose the order and direction of the marking operations.", 30, muted)
+    text(48, 109, "Optimize the travel between marking operations.", 30, muted)
     line((51, 164), (119, 164), coral, 5.5, "mark_arrow")
     text(137, 175, "Marking", 31, weight="bold")
     line((510, 164), (578, 164), navy, 3.8, "travel_arrow", dashed=True)
     text(596, 175, "Travel to minimize", 31, weight="bold")
     elements.append(
-        '<rect x="60" y="210" width="1152" height="691.2" '
-        'fill="#dce2e6" stroke="#677e8b" stroke-width="2.4"/>'
+        '<rect x="60" y="200.6" width="1152" height="614.4" '
+        'fill="#f5f7f8" stroke="#677e8b" stroke-width="2.4"/>'
     )
-    for path in WHITE_CONTOURS:
-        contour(path, "#fff")
-    for path in GRAY_CONTOURS:
-        contour(path, "#c7d0d6")
-    # Retain the central profiles shown in the supplied schematic.
-    for a, b in [((51.9, 47.6), (36.4, 0)), ((55.5, 27), (47.5, 0.5))]:
-        line(point(a), point(b), "#435f6f", 2.3)
-    for p in [(25.5, 5), (74.5, 5)]:
-        x, y = point(p)
+    for part in PARTS:
+        shape = " ".join([part["outline"], *part["holes"]])
         elements.append(
-            f'<circle cx="{x}" cy="{y}" r="12" fill="#fff" stroke="#435f6f" stroke-width="2.3"/>'
+            f'<path d="{shape}" transform="translate(60 815) scale(9.6 -9.6)" '
+            'fill="#dce4e9" fill-rule="evenodd" stroke="#435f6f" '
+            'stroke-width="0.25" stroke-linejoin="round"/>'
         )
 
     selected = 2 * sequence + direction
@@ -181,7 +156,7 @@ def render_schematic():
         )
         elements.append(f'<circle cx="{a[0]}" cy="{a[1]}" r="5" fill="{coral}"/>')
         lx, ly = point(LABELS[int(operation)])
-        # Short callouts tie operation IDs to their strokes, including the compact top group.
+        # Short callouts tie operation IDs to their strokes, without covering the strokes.
         label = np.asarray([lx, ly])
         stroke_start, stroke_end = np.asarray(a), np.asarray(b)
         vector = stroke_end - stroke_start
@@ -198,30 +173,30 @@ def render_schematic():
 
     ox, oy = point(problem.origin)
     elements.append(f'<circle cx="{ox}" cy="{oy}" r="9" fill="{navy}"/>')
-    text(60, 950, "O  ·  start / return", 30, weight="bold")
-    text(1212, 950, "Fixed schematic layout", 29, muted, anchor="end")
-    elements.append('<line x1="48" y1="978" x2="1232" y2="978" stroke="#d7e0e5"/>')
-    text(48, 1032, "Reversible direction", 32, weight="bold")
-    for bit, base in [(0, 490), (1, 876)]:
-        text(base, 1032, bit, 31, weight="bold")
-        text(base + 47, 1032, "A", 30)
-        text(base + 279, 1032, "B", 30, anchor="end")
-        a, b = ((base + 86, 1021), (base + 240, 1021))
+    text(60, 859, "O  ·  start / return", 30, weight="bold")
+    text(1212, 859, "Four parts · Eight marking operations", 29, muted, anchor="end")
+    elements.append('<line x1="48" y1="886" x2="1232" y2="886" stroke="#d7e0e5"/>')
+    text(48, 931, "Reversible direction", 32, weight="bold")
+    for row, bit in enumerate([0, 1]):
+        y = 982 + row * 58
+        text(60, y, bit, 31, weight="bold")
+        text(119, y, "A", 30)
+        text(354, y, "B", 30, anchor="end")
+        a, b = ((157, y - 10), (313, y - 10))
         if bit:
             a, b = b, a
         line(a, b, coral, 5.5, "mark_arrow")
-
-    text(48, 1103, "Example route · read from left to right", 32, weight="bold")
-    text(48, 1157, "Order", 30, weight="bold")
-    text(48, 1220, "Direction", 30, weight="bold")
+    text(455, 931, "Example route", 32, weight="bold")
+    text(455, 984, "Order", 30, weight="bold")
+    text(455, 1042, "Dir.", 30, weight="bold")
     for visit, (operation, bit) in enumerate(zip(sequence, direction)):
-        x = 265 + 69 * visit
+        x = 629 + 77 * visit
         elements.append(
-            f'<rect x="{x - 25}" y="1123" width="50" height="47" rx="5" fill="#edf2f5"/>'
+            f'<rect x="{x - 27}" y="950" width="54" height="47" rx="5" fill="#edf2f5"/>'
         )
-        text(x, 1157, int(operation) + 1, 31, weight="bold", anchor="middle")
-        text(x, 1220, int(bit), 31, weight="bold", anchor="middle")
-    text(48, 1286, "Redrawn schematic · Illustrative coordinates and route", 27, muted)
+        text(x, 984, int(operation) + 1, 31, weight="bold", anchor="middle")
+        text(x, 1042, int(bit), 31, weight="bold", anchor="middle")
+    text(48, 1092, "Synthetic layout · Illustrative coordinates and route", 27, muted)
     elements.extend(["</g>", "</svg>"])
     return "\n".join(elements) + "\n"
 

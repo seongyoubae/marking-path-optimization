@@ -36,7 +36,7 @@ The endpoint coordinates are fixed inputs. The optimizer selects the route; it d
 
 ![Marking operations, paired endpoints and travel route](assets/problem.svg)
 
-*Redrawn from the supplied marking example. Numbered red segments are marking operations; dashed arrows connect their endpoints, including approach and return. Coordinates and the route are illustrative. Figure IDs start at 1; the Python API uses zero-based IDs.*
+*An original synthetic layout: eight marking operations on four drawn parts. Larger parts contain several marking segments. Red arrows show marking; dashed arrows connect their endpoints, including approach and return. Coordinates and the route are illustrative; figure IDs start at 1.*
 
 ## Solution Representation
 

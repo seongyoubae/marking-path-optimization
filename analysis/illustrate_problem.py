@@ -64,13 +64,8 @@ PARTS = [
 ]
 
 
-# Color groups link each contour to its operation labels and visit-table cells.
-PART_PALETTE = [
-    ("#d5eae6", "#547e77"),
-    ("#d8e6f5", "#5b7ba3"),
-    ("#e4def1", "#837299"),
-    ("#e1ebd6", "#74855c"),
-]
+# Material, outlines and labels use neutral tones; marking has one accent.
+PART_FILL, PART_BORDER = "#d9d9d9", "#505050"
 
 
 def schematic_problem():
@@ -81,12 +76,7 @@ def schematic_problem():
 def render_schematic():
     problem = schematic_problem()
     sequence, direction = validate_solution(problem, SOLUTION)
-    navy, muted, coral, travel_color = "#153746", "#536a78", "#d04b40", "#275b9b"
-    operation_palette = {
-        operation: PART_PALETTE[index]
-        for index, part in enumerate(PARTS)
-        for operation in part["operations"]
-    }
+    ink, muted, coral, travel_color = "#242424", "#626262", "#c5463d", "#303030"
     elements = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1110" '
         'viewBox="0 0 1280 1110" role="img" aria-labelledby="title desc">',
@@ -95,20 +85,21 @@ def render_schematic():
         "shipbuilding-style contours. Two larger parts each contain three marking operations; "
         "two smaller brackets each contain one. Eight numbered red strokes have reversible "
         "paired endpoints. Dashed connectors show the origin approach, transfers and return. "
-        "Contour colors are repeated in the operation badges and order-table cells. "
+        "Gray contours, white numbered badges and solid versus dashed arrows distinguish "
+        "the diagram elements. Red is reserved for marking strokes. "
         "The example order ends with operation eight followed by operation seven. Coordinates "
         "and route are illustrative. Contours are not collision constraints.</desc>",
         '<defs><marker id="travel_arrow" markerWidth="15" markerHeight="15" refX="13" '
         'refY="7.5" orient="auto" markerUnits="userSpaceOnUse">'
-        '<path d="M2,2 L13,7.5 L2,13" fill="none" stroke="#275b9b" stroke-width="2.5"/>'
+        '<path d="M2,2 L13,7.5 L2,13" fill="none" stroke="#303030" stroke-width="2.5"/>'
         '</marker><marker id="mark_arrow" markerWidth="16" markerHeight="16" refX="14" '
         'refY="8" orient="auto" markerUnits="userSpaceOnUse">'
-        '<path d="M1,1 L15,8 L1,15 Z" fill="#d04b40"/></marker></defs>',
+        '<path d="M1,1 L15,8 L1,15 Z" fill="#c5463d"/></marker></defs>',
         '<rect width="1280" height="1110" fill="#fff"/>',
         '<g font-family="Arial, Helvetica, sans-serif">',
     ]
 
-    def text(x, y, value, size=30, color=navy, weight="normal", anchor="start"):
+    def text(x, y, value, size=30, color=ink, weight="normal", anchor="start"):
         elements.append(
             f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" '
             f'font-weight="{weight}" text-anchor="{anchor}">{escape(str(value))}</text>'
@@ -137,15 +128,14 @@ def render_schematic():
     text(596, 175, "Travel to minimize", 31, travel_color, weight="bold")
     elements.append(
         '<rect x="60" y="200.6" width="1152" height="614.4" '
-        'fill="#f5f7f8" stroke="#677e8b" stroke-width="2.4"/>'
+        'fill="#fafafa" stroke="#7a7a7a" stroke-width="2.4"/>'
     )
-    for index, part in enumerate(PARTS):
-        fill, border = PART_PALETTE[index]
+    for part in PARTS:
         shape = " ".join([part["outline"], *part["holes"]])
         elements.append(
             f'<path d="{shape}" transform="translate(60 815) scale(9.6 -9.6)" '
-            f'fill="{fill}" fill-rule="evenodd" stroke="{border}" '
-            'stroke-width="0.25" stroke-linejoin="round"/>'
+            f'fill="{PART_FILL}" fill-rule="evenodd" stroke="{PART_BORDER}" '
+            'stroke-width="0.30" stroke-linejoin="round"/>'
         )
 
     selected = 2 * sequence + direction
@@ -181,7 +171,6 @@ def render_schematic():
         )
         elements.append(f'<circle cx="{a[0]}" cy="{a[1]}" r="5" fill="{coral}"/>')
         lx, ly = point(LABELS[int(operation)])
-        label_fill, label_border = operation_palette[int(operation)]
         # Short callouts tie operation IDs to their strokes, without covering the strokes.
         label = np.asarray([lx, ly])
         stroke_start, stroke_end = np.asarray(a), np.asarray(b)
@@ -191,10 +180,10 @@ def render_schematic():
         offset = closest - label
         clearance = np.linalg.norm(offset)
         if clearance > 31:
-            line(label + offset * (26 / clearance), closest, "#738995", 1.6)
+            line(label + offset * (26 / clearance), closest, "#707070", 1.8)
         elements.append(
-            f'<circle cx="{lx}" cy="{ly}" r="24" fill="{label_fill}" '
-            f'stroke="{label_border}" stroke-width="1.8"/>'
+            f'<circle cx="{lx}" cy="{ly}" r="24" fill="#fff" '
+            'stroke="#404040" stroke-width="2.4"/>'
         )
         text(lx, ly + 11, int(operation) + 1, 31, weight="bold", anchor="middle")
 
@@ -202,7 +191,7 @@ def render_schematic():
     elements.append(f'<circle cx="{ox}" cy="{oy}" r="9" fill="{travel_color}"/>')
     text(60, 859, "O  ·  start / return", 30, travel_color, weight="bold")
     text(1212, 859, "Four parts · Eight marking operations", 29, muted, anchor="end")
-    elements.append('<line x1="48" y1="886" x2="1232" y2="886" stroke="#d7e0e5"/>')
+    elements.append('<line x1="48" y1="886" x2="1232" y2="886" stroke="#d5d5d5"/>')
     text(48, 931, "Reversible direction", 32, weight="bold")
     for row, bit in enumerate([0, 1]):
         y = 982 + row * 58
@@ -218,10 +207,9 @@ def render_schematic():
     text(455, 1042, "Dir.", 30, weight="bold")
     for visit, (operation, bit) in enumerate(zip(sequence, direction)):
         x = 629 + 77 * visit
-        cell_fill, cell_border = operation_palette[int(operation)]
         elements.append(
             f'<rect x="{x - 27}" y="950" width="54" height="47" rx="5" '
-            f'fill="{cell_fill}" stroke="{cell_border}" stroke-width="1.3"/>'
+            'fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>'
         )
         text(x, 984, int(operation) + 1, 31, weight="bold", anchor="middle")
         text(x, 1042, int(bit), 31, weight="bold", anchor="middle")

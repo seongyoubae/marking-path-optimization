@@ -1,126 +1,126 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1110" viewBox="0 0 1280 1110" role="img" aria-labelledby="title desc">
 <title id="title">Marking operations and the travel between their endpoints</title>
-<desc id="desc">An original synthetic layout with four independently constructed shipbuilding-style contours. Two larger parts each contain three marking operations; two smaller brackets each contain one. Eight numbered red strokes have reversible paired endpoints. Dashed connectors show the origin approach, transfers and return. Contour colors are repeated in the operation badges and order-table cells. The example order ends with operation eight followed by operation seven. Coordinates and route are illustrative. Contours are not collision constraints.</desc>
-<defs><marker id="travel_arrow" markerWidth="15" markerHeight="15" refX="13" refY="7.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M2,2 L13,7.5 L2,13" fill="none" stroke="#275b9b" stroke-width="2.5"/></marker><marker id="mark_arrow" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L15,8 L1,15 Z" fill="#d04b40"/></marker></defs>
+<desc id="desc">An original synthetic layout with four independently constructed shipbuilding-style contours. Two larger parts each contain three marking operations; two smaller brackets each contain one. Eight numbered red strokes have reversible paired endpoints. Dashed connectors show the origin approach, transfers and return. Gray contours, white numbered badges and solid versus dashed arrows distinguish the diagram elements. Red is reserved for marking strokes. The example order ends with operation eight followed by operation seven. Coordinates and route are illustrative. Contours are not collision constraints.</desc>
+<defs><marker id="travel_arrow" markerWidth="15" markerHeight="15" refX="13" refY="7.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M2,2 L13,7.5 L2,13" fill="none" stroke="#303030" stroke-width="2.5"/></marker><marker id="mark_arrow" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L15,8 L1,15 Z" fill="#c5463d"/></marker></defs>
 <rect width="1280" height="1110" fill="#fff"/>
 <g font-family="Arial, Helvetica, sans-serif">
-<text x="48" y="61" font-size="44" fill="#153746" font-weight="bold" text-anchor="start">Marking path optimization</text>
-<text x="48" y="109" font-size="30" fill="#536a78" font-weight="normal" text-anchor="start">Optimize the travel between marking operations.</text>
-<line x1="51.00" y1="164.00" x2="119.00" y2="164.00" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
-<text x="137" y="175" font-size="31" fill="#d04b40" font-weight="bold" text-anchor="start">Marking</text>
-<line x1="510.00" y1="164.00" x2="578.00" y2="164.00" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9"/>
-<text x="596" y="175" font-size="31" fill="#275b9b" font-weight="bold" text-anchor="start">Travel to minimize</text>
-<rect x="60" y="200.6" width="1152" height="614.4" fill="#f5f7f8" stroke="#677e8b" stroke-width="2.4"/>
-<path d="M5,6 L53,6 L53,20 L47,20 L47,26 L35,26 L35,30 Q30,30 30,33 Q30,36 35,36 L35,41 L43,41 L43,58 L10,58 L5,53 Z M20,46 L29,46 A3,3 0 0 1 29,52 L20,52 A3,3 0 0 1 20,46 Z M20,11 L35,11 A3,3 0 0 1 35,17 L20,17 A3,3 0 0 1 20,11 Z" transform="translate(60 815) scale(9.6 -9.6)" fill="#d5eae6" fill-rule="evenodd" stroke="#547e77" stroke-width="0.25" stroke-linejoin="round"/>
-<path d="M57,39 L62,35 L81,35 L81,39 Q84,43 87,39 L87,35 L110,35 L116,41 L116,59 L62,59 L57,54 Z M68.5,45 L76.5,45 A3.5,3.5 0 0 1 76.5,52 L68.5,52 A3.5,3.5 0 0 1 68.5,45 Z M94.5,45 L102.5,45 A3.5,3.5 0 0 1 102.5,52 L94.5,52 A3.5,3.5 0 0 1 94.5,45 Z" transform="translate(60 815) scale(9.6 -9.6)" fill="#d8e6f5" fill-rule="evenodd" stroke="#5b7ba3" stroke-width="0.25" stroke-linejoin="round"/>
-<path d="M57,6 L89,6 L89,12 L65,31 L57,31 L57,10 Q62,10 62,6 Z M70,18 A3,3 0 1 0 64,18 A3,3 0 1 0 70,18 Z" transform="translate(60 815) scale(9.6 -9.6)" fill="#e4def1" fill-rule="evenodd" stroke="#837299" stroke-width="0.25" stroke-linejoin="round"/>
-<path d="M94,31 L117,31 L117,6 L111,6 L95,23 Q94,26 94,31 Z M112.8,23 A2.8,2.8 0 1 0 107.2,23 A2.8,2.8 0 1 0 112.8,23 Z" transform="translate(60 815) scale(9.6 -9.6)" fill="#e1ebd6" fill-rule="evenodd" stroke="#74855c" stroke-width="0.25" stroke-linejoin="round"/>
+<text x="48" y="61" font-size="44" fill="#242424" font-weight="bold" text-anchor="start">Marking path optimization</text>
+<text x="48" y="109" font-size="30" fill="#626262" font-weight="normal" text-anchor="start">Optimize the travel between marking operations.</text>
+<line x1="51.00" y1="164.00" x2="119.00" y2="164.00" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<text x="137" y="175" font-size="31" fill="#c5463d" font-weight="bold" text-anchor="start">Marking</text>
+<line x1="510.00" y1="164.00" x2="578.00" y2="164.00" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9"/>
+<text x="596" y="175" font-size="31" fill="#303030" font-weight="bold" text-anchor="start">Travel to minimize</text>
+<rect x="60" y="200.6" width="1152" height="614.4" fill="#fafafa" stroke="#7a7a7a" stroke-width="2.4"/>
+<path d="M5,6 L53,6 L53,20 L47,20 L47,26 L35,26 L35,30 Q30,30 30,33 Q30,36 35,36 L35,41 L43,41 L43,58 L10,58 L5,53 Z M20,46 L29,46 A3,3 0 0 1 29,52 L20,52 A3,3 0 0 1 20,46 Z M20,11 L35,11 A3,3 0 0 1 35,17 L20,17 A3,3 0 0 1 20,11 Z" transform="translate(60 815) scale(9.6 -9.6)" fill="#d9d9d9" fill-rule="evenodd" stroke="#505050" stroke-width="0.30" stroke-linejoin="round"/>
+<path d="M57,39 L62,35 L81,35 L81,39 Q84,43 87,39 L87,35 L110,35 L116,41 L116,59 L62,59 L57,54 Z M68.5,45 L76.5,45 A3.5,3.5 0 0 1 76.5,52 L68.5,52 A3.5,3.5 0 0 1 68.5,45 Z M94.5,45 L102.5,45 A3.5,3.5 0 0 1 102.5,52 L94.5,52 A3.5,3.5 0 0 1 94.5,45 Z" transform="translate(60 815) scale(9.6 -9.6)" fill="#d9d9d9" fill-rule="evenodd" stroke="#505050" stroke-width="0.30" stroke-linejoin="round"/>
+<path d="M57,6 L89,6 L89,12 L65,31 L57,31 L57,10 Q62,10 62,6 Z M70,18 A3,3 0 1 0 64,18 A3,3 0 1 0 70,18 Z" transform="translate(60 815) scale(9.6 -9.6)" fill="#d9d9d9" fill-rule="evenodd" stroke="#505050" stroke-width="0.30" stroke-linejoin="round"/>
+<path d="M94,31 L117,31 L117,6 L111,6 L95,23 Q94,26 94,31 Z M112.8,23 A2.8,2.8 0 1 0 107.2,23 A2.8,2.8 0 1 0 112.8,23 Z" transform="translate(60 815) scale(9.6 -9.6)" fill="#d9d9d9" fill-rule="evenodd" stroke="#505050" stroke-width="0.30" stroke-linejoin="round"/>
 <line x1="60.00" y1="815.00" x2="149.31" y2="734.62" stroke="#fff" stroke-width="6.8"/>
-<line x1="60.00" y1="815.00" x2="149.31" y2="734.62" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="0"/>
+<line x1="60.00" y1="815.00" x2="149.31" y2="734.62" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="0"/>
 <line x1="501.60" y1="728.60" x2="164.46" y2="606.86" stroke="#fff" stroke-width="6.8"/>
-<line x1="501.60" y1="728.60" x2="164.46" y2="606.86" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="1"/>
+<line x1="501.60" y1="728.60" x2="164.46" y2="606.86" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="1"/>
 <line x1="156.00" y1="344.60" x2="198.24" y2="293.91" stroke="#fff" stroke-width="6.8"/>
-<line x1="156.00" y1="344.60" x2="198.24" y2="293.91" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="2"/>
+<line x1="156.00" y1="344.60" x2="198.24" y2="293.91" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="2"/>
 <line x1="424.80" y1="287.00" x2="655.81" y2="277.76" stroke="#fff" stroke-width="6.8"/>
-<line x1="424.80" y1="287.00" x2="655.81" y2="277.76" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="3"/>
+<line x1="424.80" y1="287.00" x2="655.81" y2="277.76" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="3"/>
 <line x1="1106.40" y1="277.40" x2="1129.44" y2="292.76" stroke="#fff" stroke-width="6.8"/>
-<line x1="1106.40" y1="277.40" x2="1129.44" y2="292.76" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="4"/>
+<line x1="1106.40" y1="277.40" x2="1129.44" y2="292.76" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="4"/>
 <line x1="1135.20" y1="431.00" x2="1104.48" y2="415.64" stroke="#fff" stroke-width="6.8"/>
-<line x1="1135.20" y1="431.00" x2="1104.48" y2="415.64" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="5"/>
+<line x1="1135.20" y1="431.00" x2="1104.48" y2="415.64" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="5"/>
 <line x1="664.80" y1="411.80" x2="992.44" y2="542.86" stroke="#fff" stroke-width="6.8"/>
-<line x1="664.80" y1="411.80" x2="992.44" y2="542.86" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="6"/>
+<line x1="664.80" y1="411.80" x2="992.44" y2="542.86" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="6"/>
 <line x1="1154.40" y1="546.20" x2="854.94" y2="724.01" stroke="#fff" stroke-width="6.8"/>
-<line x1="1154.40" y1="546.20" x2="854.94" y2="724.01" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="7"/>
+<line x1="1154.40" y1="546.20" x2="854.94" y2="724.01" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="7"/>
 <line x1="684.00" y1="728.60" x2="68.91" y2="813.77" stroke="#fff" stroke-width="6.8"/>
-<line x1="684.00" y1="728.60" x2="68.91" y2="813.77" stroke="#275b9b" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="8"/>
+<line x1="684.00" y1="728.60" x2="68.91" y2="813.77" stroke="#303030" stroke-width="3.8" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="12 9" data-travel-leg="8"/>
 <line x1="156.00" y1="728.60" x2="501.60" y2="728.60" stroke="#fff" stroke-width="8.5"/>
-<line x1="156.00" y1="728.60" x2="501.60" y2="728.60" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="0"/>
-<circle cx="156.0" cy="728.6" r="5" fill="#d04b40"/>
-<line x1="508.77" y1="723.82" x2="501.60" y2="728.60" stroke="#738995" stroke-width="1.6" stroke-linecap="round"/>
-<circle cx="530.4" cy="709.4" r="24" fill="#d5eae6" stroke="#547e77" stroke-width="1.8"/>
-<text x="530.4" y="720.4" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">1</text>
+<line x1="156.00" y1="728.60" x2="501.60" y2="728.60" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="0"/>
+<circle cx="156.0" cy="728.6" r="5" fill="#c5463d"/>
+<line x1="508.77" y1="723.82" x2="501.60" y2="728.60" stroke="#707070" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="530.4" cy="709.4" r="24" fill="#fff" stroke="#404040" stroke-width="2.4"/>
+<text x="530.4" y="720.4" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">1</text>
 <line x1="156.00" y1="603.80" x2="156.00" y2="344.60" stroke="#fff" stroke-width="8.5"/>
-<line x1="156.00" y1="603.80" x2="156.00" y2="344.60" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="1"/>
-<circle cx="156.0" cy="603.8" r="5" fill="#d04b40"/>
-<line x1="143.60" y1="469.40" x2="156.00" y2="469.40" stroke="#738995" stroke-width="1.6" stroke-linecap="round"/>
-<circle cx="117.6" cy="469.40000000000003" r="24" fill="#d5eae6" stroke="#547e77" stroke-width="1.8"/>
-<text x="117.6" y="480.40000000000003" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">2</text>
+<line x1="156.00" y1="603.80" x2="156.00" y2="344.60" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="1"/>
+<circle cx="156.0" cy="603.8" r="5" fill="#c5463d"/>
+<line x1="143.60" y1="469.40" x2="156.00" y2="469.40" stroke="#707070" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="117.6" cy="469.40000000000003" r="24" fill="#fff" stroke="#404040" stroke-width="2.4"/>
+<text x="117.6" y="480.40000000000003" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">2</text>
 <line x1="204.00" y1="287.00" x2="424.80" y2="287.00" stroke="#fff" stroke-width="8.5"/>
-<line x1="204.00" y1="287.00" x2="424.80" y2="287.00" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="2"/>
-<circle cx="204.0" cy="287.0" r="5" fill="#d04b40"/>
-<line x1="357.60" y1="269.80" x2="357.60" y2="287.00" stroke="#738995" stroke-width="1.6" stroke-linecap="round"/>
-<circle cx="357.59999999999997" cy="243.80000000000007" r="24" fill="#d5eae6" stroke="#547e77" stroke-width="1.8"/>
-<text x="357.59999999999997" y="254.80000000000007" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">3</text>
+<line x1="204.00" y1="287.00" x2="424.80" y2="287.00" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="2"/>
+<circle cx="204.0" cy="287.0" r="5" fill="#c5463d"/>
+<line x1="357.60" y1="269.80" x2="357.60" y2="287.00" stroke="#707070" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="357.59999999999997" cy="243.80000000000007" r="24" fill="#fff" stroke="#404040" stroke-width="2.4"/>
+<text x="357.59999999999997" y="254.80000000000007" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">3</text>
 <line x1="664.80" y1="277.40" x2="1106.40" y2="277.40" stroke="#fff" stroke-width="8.5"/>
-<line x1="664.80" y1="277.40" x2="1106.40" y2="277.40" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="3"/>
-<circle cx="664.8" cy="277.4" r="5" fill="#d04b40"/>
-<line x1="808.80" y1="250.60" x2="808.80" y2="277.40" stroke="#738995" stroke-width="1.6" stroke-linecap="round"/>
-<circle cx="808.8" cy="224.60000000000002" r="24" fill="#d8e6f5" stroke="#5b7ba3" stroke-width="1.8"/>
-<text x="808.8" y="235.60000000000002" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">4</text>
+<line x1="664.80" y1="277.40" x2="1106.40" y2="277.40" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="3"/>
+<circle cx="664.8" cy="277.4" r="5" fill="#c5463d"/>
+<line x1="808.80" y1="250.60" x2="808.80" y2="277.40" stroke="#707070" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="808.8" cy="224.60000000000002" r="24" fill="#fff" stroke="#404040" stroke-width="2.4"/>
+<text x="808.8" y="235.60000000000002" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">4</text>
 <line x1="1135.20" y1="296.60" x2="1135.20" y2="431.00" stroke="#fff" stroke-width="8.5"/>
-<line x1="1135.20" y1="296.60" x2="1135.20" y2="431.00" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="4"/>
-<circle cx="1135.2" cy="296.6" r="5" fill="#d04b40"/>
-<line x1="1157.20" y1="363.80" x2="1135.20" y2="363.80" stroke="#738995" stroke-width="1.6" stroke-linecap="round"/>
-<circle cx="1183.2" cy="363.8" r="24" fill="#d8e6f5" stroke="#5b7ba3" stroke-width="1.8"/>
-<text x="1183.2" y="374.8" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">5</text>
+<line x1="1135.20" y1="296.60" x2="1135.20" y2="431.00" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="4"/>
+<circle cx="1135.2" cy="296.6" r="5" fill="#c5463d"/>
+<line x1="1157.20" y1="363.80" x2="1135.20" y2="363.80" stroke="#707070" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="1183.2" cy="363.8" r="24" fill="#fff" stroke="#404040" stroke-width="2.4"/>
+<text x="1183.2" y="374.8" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">5</text>
 <line x1="1096.80" y1="411.80" x2="664.80" y2="411.80" stroke="#fff" stroke-width="8.5"/>
-<line x1="1096.80" y1="411.80" x2="664.80" y2="411.80" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="5"/>
-<circle cx="1096.8" cy="411.8" r="5" fill="#d04b40"/>
-<line x1="1000.80" y1="424.20" x2="1000.80" y2="411.80" stroke="#738995" stroke-width="1.6" stroke-linecap="round"/>
-<circle cx="1000.8" cy="450.2" r="24" fill="#d8e6f5" stroke="#5b7ba3" stroke-width="1.8"/>
-<text x="1000.8" y="461.2" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">6</text>
+<line x1="1096.80" y1="411.80" x2="664.80" y2="411.80" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="5"/>
+<circle cx="1096.8" cy="411.8" r="5" fill="#c5463d"/>
+<line x1="1000.80" y1="424.20" x2="1000.80" y2="411.80" stroke="#707070" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="1000.8" cy="450.2" r="24" fill="#fff" stroke="#404040" stroke-width="2.4"/>
+<text x="1000.8" y="461.2" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">6</text>
 <line x1="1000.80" y1="546.20" x2="1154.40" y2="546.20" stroke="#fff" stroke-width="8.5"/>
-<line x1="1000.80" y1="546.20" x2="1154.40" y2="546.20" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="7"/>
-<circle cx="1000.8" cy="546.2" r="5" fill="#d04b40"/>
-<line x1="1020.00" y1="533.80" x2="1020.00" y2="546.20" stroke="#738995" stroke-width="1.6" stroke-linecap="round"/>
-<circle cx="1020.0" cy="507.8" r="24" fill="#e1ebd6" stroke="#74855c" stroke-width="1.8"/>
-<text x="1020.0" y="518.8" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">8</text>
+<line x1="1000.80" y1="546.20" x2="1154.40" y2="546.20" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="7"/>
+<circle cx="1000.8" cy="546.2" r="5" fill="#c5463d"/>
+<line x1="1020.00" y1="533.80" x2="1020.00" y2="546.20" stroke="#707070" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="1020.0" cy="507.8" r="24" fill="#fff" stroke="#404040" stroke-width="2.4"/>
+<text x="1020.0" y="518.8" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">8</text>
 <line x1="847.20" y1="728.60" x2="684.00" y2="728.60" stroke="#fff" stroke-width="8.5"/>
-<line x1="847.20" y1="728.60" x2="684.00" y2="728.60" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="6"/>
-<circle cx="847.1999999999999" cy="728.6" r="5" fill="#d04b40"/>
-<line x1="789.60" y1="736.20" x2="789.60" y2="728.60" stroke="#738995" stroke-width="1.6" stroke-linecap="round"/>
-<circle cx="789.6" cy="762.2" r="24" fill="#e4def1" stroke="#837299" stroke-width="1.8"/>
-<text x="789.6" y="773.2" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">7</text>
-<circle cx="60.0" cy="815.0" r="9" fill="#275b9b"/>
-<text x="60" y="859" font-size="30" fill="#275b9b" font-weight="bold" text-anchor="start">O  ·  start / return</text>
-<text x="1212" y="859" font-size="29" fill="#536a78" font-weight="normal" text-anchor="end">Four parts · Eight marking operations</text>
-<line x1="48" y1="886" x2="1232" y2="886" stroke="#d7e0e5"/>
-<text x="48" y="931" font-size="32" fill="#153746" font-weight="bold" text-anchor="start">Reversible direction</text>
-<text x="60" y="982" font-size="31" fill="#153746" font-weight="bold" text-anchor="start">0</text>
-<text x="119" y="982" font-size="30" fill="#153746" font-weight="normal" text-anchor="start">A</text>
-<text x="354" y="982" font-size="30" fill="#153746" font-weight="normal" text-anchor="end">B</text>
-<line x1="157.00" y1="972.00" x2="313.00" y2="972.00" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
-<text x="60" y="1040" font-size="31" fill="#153746" font-weight="bold" text-anchor="start">1</text>
-<text x="119" y="1040" font-size="30" fill="#153746" font-weight="normal" text-anchor="start">A</text>
-<text x="354" y="1040" font-size="30" fill="#153746" font-weight="normal" text-anchor="end">B</text>
-<line x1="313.00" y1="1030.00" x2="157.00" y2="1030.00" stroke="#d04b40" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
-<text x="455" y="931" font-size="32" fill="#153746" font-weight="bold" text-anchor="start">Example route</text>
-<text x="455" y="984" font-size="30" fill="#153746" font-weight="bold" text-anchor="start">Order</text>
-<text x="455" y="1042" font-size="30" fill="#153746" font-weight="bold" text-anchor="start">Dir.</text>
-<rect x="602" y="950" width="54" height="47" rx="5" fill="#d5eae6" stroke="#547e77" stroke-width="1.3"/>
-<text x="629" y="984" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">1</text>
-<text x="629" y="1042" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">0</text>
-<rect x="679" y="950" width="54" height="47" rx="5" fill="#d5eae6" stroke="#547e77" stroke-width="1.3"/>
-<text x="706" y="984" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">2</text>
-<text x="706" y="1042" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">0</text>
-<rect x="756" y="950" width="54" height="47" rx="5" fill="#d5eae6" stroke="#547e77" stroke-width="1.3"/>
-<text x="783" y="984" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">3</text>
-<text x="783" y="1042" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">0</text>
-<rect x="833" y="950" width="54" height="47" rx="5" fill="#d8e6f5" stroke="#5b7ba3" stroke-width="1.3"/>
-<text x="860" y="984" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">4</text>
-<text x="860" y="1042" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">0</text>
-<rect x="910" y="950" width="54" height="47" rx="5" fill="#d8e6f5" stroke="#5b7ba3" stroke-width="1.3"/>
-<text x="937" y="984" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">5</text>
-<text x="937" y="1042" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">0</text>
-<rect x="987" y="950" width="54" height="47" rx="5" fill="#d8e6f5" stroke="#5b7ba3" stroke-width="1.3"/>
-<text x="1014" y="984" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">6</text>
-<text x="1014" y="1042" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">1</text>
-<rect x="1064" y="950" width="54" height="47" rx="5" fill="#e1ebd6" stroke="#74855c" stroke-width="1.3"/>
-<text x="1091" y="984" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">8</text>
-<text x="1091" y="1042" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">0</text>
-<rect x="1141" y="950" width="54" height="47" rx="5" fill="#e4def1" stroke="#837299" stroke-width="1.3"/>
-<text x="1168" y="984" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">7</text>
-<text x="1168" y="1042" font-size="31" fill="#153746" font-weight="bold" text-anchor="middle">1</text>
-<text x="48" y="1092" font-size="27" fill="#536a78" font-weight="normal" text-anchor="start">Synthetic layout · Illustrative coordinates and route</text>
+<line x1="847.20" y1="728.60" x2="684.00" y2="728.60" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)" data-marking-operation="6"/>
+<circle cx="847.1999999999999" cy="728.6" r="5" fill="#c5463d"/>
+<line x1="789.60" y1="736.20" x2="789.60" y2="728.60" stroke="#707070" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="789.6" cy="762.2" r="24" fill="#fff" stroke="#404040" stroke-width="2.4"/>
+<text x="789.6" y="773.2" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">7</text>
+<circle cx="60.0" cy="815.0" r="9" fill="#303030"/>
+<text x="60" y="859" font-size="30" fill="#303030" font-weight="bold" text-anchor="start">O  ·  start / return</text>
+<text x="1212" y="859" font-size="29" fill="#626262" font-weight="normal" text-anchor="end">Four parts · Eight marking operations</text>
+<line x1="48" y1="886" x2="1232" y2="886" stroke="#d5d5d5"/>
+<text x="48" y="931" font-size="32" fill="#242424" font-weight="bold" text-anchor="start">Reversible direction</text>
+<text x="60" y="982" font-size="31" fill="#242424" font-weight="bold" text-anchor="start">0</text>
+<text x="119" y="982" font-size="30" fill="#242424" font-weight="normal" text-anchor="start">A</text>
+<text x="354" y="982" font-size="30" fill="#242424" font-weight="normal" text-anchor="end">B</text>
+<line x1="157.00" y1="972.00" x2="313.00" y2="972.00" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<text x="60" y="1040" font-size="31" fill="#242424" font-weight="bold" text-anchor="start">1</text>
+<text x="119" y="1040" font-size="30" fill="#242424" font-weight="normal" text-anchor="start">A</text>
+<text x="354" y="1040" font-size="30" fill="#242424" font-weight="normal" text-anchor="end">B</text>
+<line x1="313.00" y1="1030.00" x2="157.00" y2="1030.00" stroke="#c5463d" stroke-width="5.5" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<text x="455" y="931" font-size="32" fill="#242424" font-weight="bold" text-anchor="start">Example route</text>
+<text x="455" y="984" font-size="30" fill="#242424" font-weight="bold" text-anchor="start">Order</text>
+<text x="455" y="1042" font-size="30" fill="#242424" font-weight="bold" text-anchor="start">Dir.</text>
+<rect x="602" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
+<text x="629" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">1</text>
+<text x="629" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="679" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
+<text x="706" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">2</text>
+<text x="706" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="756" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
+<text x="783" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">3</text>
+<text x="783" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="833" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
+<text x="860" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">4</text>
+<text x="860" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="910" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
+<text x="937" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">5</text>
+<text x="937" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="987" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
+<text x="1014" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">6</text>
+<text x="1014" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">1</text>
+<rect x="1064" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
+<text x="1091" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">8</text>
+<text x="1091" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">0</text>
+<rect x="1141" y="950" width="54" height="47" rx="5" fill="#f4f4f4" stroke="#707070" stroke-width="1.5"/>
+<text x="1168" y="984" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">7</text>
+<text x="1168" y="1042" font-size="31" fill="#242424" font-weight="bold" text-anchor="middle">1</text>
+<text x="48" y="1092" font-size="27" fill="#626262" font-weight="normal" text-anchor="start">Synthetic layout · Illustrative coordinates and route</text>
 </g>
 </svg>

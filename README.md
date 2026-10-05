@@ -58,13 +58,15 @@ Direction `0` traverses the first endpoint to the second; direction `1` reverses
 
 The main implementation is in [`src/sac_gwo.py`](src/sac_gwo.py). The public runner enables `adaptive_a`, logistic chaos and `advanced_gwo` together for SAC-GWO.
 
+Here $t$ is the generation index, $T$ is the number of generations, $f$ contains the population fitness values, and $\kappa$ is the `k_coupling` parameter.
+
 | Mechanism | Behavior implemented in the source |
 | :--- | :--- |
-| Population state | Measures normalized fitness diversity as `std(fitness) / mean(fitness)`, when the mean is positive. |
-| Adaptive control | Starts from `a = 2 - 2*t/T`. Below the diversity threshold `0.05`, SAC-GWO increases `a` proportionally, capped at `2.0`. |
-| Chaotic perturbation | Updates a logistic state with `z = 4*z*(1-z)` and uses `2*z > 1` to trigger a swap in a leader's sequence. |
-| Coupled control | Sets the advanced-operator probability to `tau = k_coupling * a`; the source default coupling is `0.05`. |
-| Operator selection | In the advanced branch, `abs(A) > 1` selects block insertion; otherwise it selects segment inversion. |
+| Population state | Measures normalized fitness diversity as $D = \sigma(f)/\mu(f)$, using the population fitness values when the mean exceeds $10^{-9}$. |
+| Adaptive control | Starts from $a_{\mathrm{base}}(t) = 2 - 2t/T$. Below the diversity threshold $0.05$, SAC-GWO increases $a$ proportionally, capped at $2.0$. |
+| Chaotic perturbation | Updates a logistic state with $z \leftarrow 4z(1-z)$ and uses $2z > 1$ to trigger a swap in a leader's sequence. |
+| Coupled control | Sets the advanced-operator probability to $\tau = \kappa a$; the source default coupling is $\kappa = 0.05$. |
+| Operator selection | In the advanced branch, $\lvert A\rvert > 1$ selects block insertion; otherwise it selects segment inversion. |
 | Leader guidance | Uses alpha, beta and delta candidates with selection weights `0.5`, `0.3` and `0.2`, permutation crossover and direction mixing. |
 | Update acceptance | Accepts a candidate only when its evaluated travel cost improves; copies the three leaders into the next population. |
 
@@ -76,7 +78,7 @@ Sequence swap and direction-bit mutation are also available. Segment inversion r
 | :--- | :--- |
 | **GA** | Tournament selection, elitism, position-based sequence crossover, uniform direction crossover, swap mutation and bit flips. |
 | **PSO** | The supplied LPSPSO variant: random-key decoding, time-varying coefficients, Singer-map control and Lévy-flight updates. It is not a separate vanilla PSO implementation. |
-| **SA** | Sequence swaps and a direction flip, Metropolis acceptance and geometric cooling. Each temperature level evaluates `n^3` proposals. |
+| **SA** | Sequence swaps and a direction flip, Metropolis acceptance and geometric cooling. Each temperature level evaluates $n^3$ proposals. |
 | **ACO** | Nearest-neighbor initial route, endpoint-based probabilistic construction, evaporation and cost-based pheromone deposits. |
 | **Gurobi — optional** | Mixed-integer route model with direction-specific arcs, flow constraints and MTZ subtour constraints. Reports the source status label and percentage MIP gap. |
 
@@ -84,13 +86,15 @@ Gurobi is installed separately and may require a commercial or other eligible li
 
 ## Optimization Objective
 
-Let `o` be the origin and `e_i`, `x_i` the selected entry and exit at visit position `i`. The objective implemented by the solvers is:
+Let $o$ be the origin and $e_i$, $x_i$ the selected entry and exit at visit position $i$. The objective implemented by the solvers is:
 
-$$
-L = \lVert o-e_1\rVert_2
-  + \sum_{i=1}^{n-1}\lVert x_i-e_{i+1}\rVert_2
-  + \lVert x_n-o\rVert_2
-$$
+```math
+\begin{aligned}
+L ={}& \left\lVert o-e_1 \right\rVert_2 \\
+&+ \sum_{i=1}^{n-1} \left\lVert x_i-e_{i+1} \right\rVert_2 \\
+&+ \left\lVert x_n-o \right\rVert_2
+\end{aligned}
+```
 
 This is **non-processing travel**: approach, transfer and return movement. The entry-to-exit processing strokes are excluded. For reversible paired endpoints, their total length is fixed, so adding that constant would not change which route minimizes total movement.
 
@@ -112,7 +116,7 @@ Source-specific details and preserved differences are documented in [`docs/imple
 
 The ablation runner uses the five configurations listed in the uploaded main source:
 
-| Configuration | Adaptive `a` | Logistic chaos | Advanced coupled operators |
+| Configuration | Adaptive $a$ | Logistic chaos | Advanced coupled operators |
 | :--- | :---: | :---: | :---: |
 | GWO | — | — | — |
 | C-GWO | — | ✓ | — |
@@ -120,7 +124,7 @@ The ablation runner uses the five configurations listed in the uploaded main sou
 | AC-GWO | ✓ | ✓ | — |
 | SAC-GWO | ✓ | ✓ | ✓ |
 
-These are variants of the supplied discrete GWO implementation, rather than claims of reproducing a separate textbook implementation. A-GWO and AC-GWO set `a = 1.8` in their low-diversity branch; SAC-GWO uses the proportional boost described above.
+These are variants of the supplied discrete GWO implementation, rather than claims of reproducing a separate textbook implementation. A-GWO and AC-GWO set $a = 1.8$ in their low-diversity branch; SAC-GWO uses the proportional boost described above.
 
 The sensitivity runner uses the uploaded grid `k_coupling = [0.0, 0.025, 0.05, 0.075, 0.1]`. It preserves the optimizer from the separate sensitivity file in `experiments/sensitivity_optimizer.py`, because its update logic differs from the main implementation. The output labels that implementation as `source_sensitivity`; the two implementations are not silently merged.
 

@@ -16,3 +16,4 @@ jobs:
       - run: python -m pytest -q -m 'not gurobi'
       - run: python -m src.run --population 8 --generations 5
       - run: python -m analysis.plot_route
+      - run: python -m analysis.illustrate_problem --output outputs/problem.svg

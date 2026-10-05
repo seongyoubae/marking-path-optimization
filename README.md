@@ -34,9 +34,9 @@ Each part has two endpoints. The tool enters through one endpoint and finishes a
 
 The part coordinates are fixed inputs. The optimizer selects the route; it does not generate a nesting layout, move parts, enforce collision constraints or model machine acceleration.
 
-![Paired endpoints and travel legs on synthetic geometry](assets/problem.png)
+![Paired endpoints and travel legs on synthetic geometry](assets/problem.svg)
 
-*Illustration of the input and route model, using a manually selected sequence on synthetic endpoints. This is not an experimental performance result. Solid arrows represent fixed processing strokes; dashed arrows represent the travel scored by the objective.*
+*Synthetic nesting-style schematic: fixed marking segments on the left, one selected visit order and direction on the right. Coral arrows show marking; dashed blue arrows show the travel scored by the objective. Part outlines provide visual context only. This is an illustrative route, not a measured optimization result.*
 
 ## Solution Representation
 
@@ -167,7 +167,7 @@ marking-path-optimization/
 │   ├── statistical_test.py
 │   └── plot_route.py
 ├── data/sample/synthetic_parts.json
-├── assets/problem.png
+├── assets/problem.svg
 ├── docs/implementation_notes.md
 ├── tests/
 └── .github/workflows/tests.yml

@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="810" viewBox="0 0 1280 810" role="img" aria-labelledby="title desc">
+<title id="title">Marking segments and a route through paired endpoints</title>
+<desc id="desc">The same synthetic layout before and after selecting a route. Coral lines are fixed marking segments. Dashed blue arrows connect the origin, selected entries and exits. Part outlines are illustrative, not collision constraints.</desc>
+<defs><marker id="travel_arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8" fill="#244e70"/></marker><marker id="mark_arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10" fill="#d45e47"/></marker></defs>
+<rect width="1280" height="810" rx="20" fill="#f7f9fb"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<text x="32" y="54" font-size="34" fill="#17394b" font-weight="bold" text-anchor="start">Marking segments and travel route</text>
+<text x="32" y="90" font-size="21" fill="#586d7b" font-weight="normal" text-anchor="start">Visit order and direction change the travel between fixed marking segments.</text>
+<rect x="32" y="124" width="584" height="534" rx="14" fill="#ffffff" stroke="#d8e1e7"/>
+<text x="56" y="164" font-size="27" fill="#17394b" font-weight="bold" text-anchor="start">Fixed layout</text>
+<text x="56" y="198" font-size="19" fill="#586d7b" font-weight="normal" text-anchor="start">Each segment has two reversible endpoints</text>
+<rect x="84.0" y="254.0" width="480" height="336" fill="#e9eef1" stroke="#80909c" stroke-width="1.5"/>
+<polygon points="122.40,551.60 247.20,551.60 247.20,465.20 213.60,465.20 213.60,494.00 122.40,494.00" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="362.40,551.60 530.40,551.60 530.40,474.80 463.20,474.80 439.20,503.60 362.40,503.60" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="376.80,441.20 530.40,441.20 530.40,354.80 496.80,354.80 496.80,383.60 376.80,383.60" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="381.60,330.80 516.00,330.80 540.00,292.40 516.00,268.40 381.60,268.40" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="127.20,335.60 295.20,335.60 295.20,268.40 127.20,268.40 127.20,297.20 165.60,297.20 165.60,311.60 127.20,311.60" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="127.20,446.00 280.80,446.00 280.80,364.40 228.00,364.40 228.00,393.20 127.20,393.20" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<line x1="136.80" y1="532.40" x2="223.20" y2="532.40" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<circle cx="136.80" cy="532.40" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="223.20" cy="532.40" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<text x="184.8" y="514.4" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M1</text>
+<line x1="482.40" y1="537.20" x2="506.40" y2="494.00" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<circle cx="482.40" cy="537.20" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="506.40" cy="494.00" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<text x="415.2" y="519.2" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M2</text>
+<line x1="506.40" y1="431.60" x2="506.40" y2="369.20" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<circle cx="506.40" cy="431.60" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="506.40" cy="369.20" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<text x="434.4" y="423.20000000000005" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M3</text>
+<line x1="400.80" y1="297.20" x2="506.40" y2="297.20" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<circle cx="400.80" cy="297.20" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="506.40" cy="297.20" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<text x="448.8" y="327.2" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M4</text>
+<line x1="146.40" y1="287.60" x2="276.00" y2="287.60" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<circle cx="146.40" cy="287.60" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="276.00" cy="287.60" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<text x="223.2" y="327.2" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M5</text>
+<line x1="151.20" y1="426.80" x2="213.60" y2="407.60" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<circle cx="151.20" cy="426.80" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="213.60" cy="407.60" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<text x="252.0" y="384.8" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M6</text>
+<text x="136.8" y="556.4" font-size="16" fill="#a54a3a" font-weight="normal" text-anchor="middle">A</text>
+<text x="223.2" y="556.4" font-size="16" fill="#a54a3a" font-weight="normal" text-anchor="middle">B</text>
+<circle cx="84.0" cy="590.0" r="9" fill="#244e70"/>
+<text x="100.0" y="616.0" font-size="18" fill="#244e70" font-weight="normal" text-anchor="start">Origin</text>
+<rect x="664" y="124" width="584" height="534" rx="14" fill="#ffffff" stroke="#d8e1e7"/>
+<text x="688" y="164" font-size="27" fill="#17394b" font-weight="bold" text-anchor="start">Sequence and direction</text>
+<text x="688" y="198" font-size="19" fill="#586d7b" font-weight="normal" text-anchor="start">Connect each exit to the next entry</text>
+<rect x="716.0" y="254.0" width="480" height="336" fill="#e9eef1" stroke="#80909c" stroke-width="1.5"/>
+<polygon points="754.40,551.60 879.20,551.60 879.20,465.20 845.60,465.20 845.60,494.00 754.40,494.00" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="994.40,551.60 1162.40,551.60 1162.40,474.80 1095.20,474.80 1071.20,503.60 994.40,503.60" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="1008.80,441.20 1162.40,441.20 1162.40,354.80 1128.80,354.80 1128.80,383.60 1008.80,383.60" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="1013.60,330.80 1148.00,330.80 1172.00,292.40 1148.00,268.40 1013.60,268.40" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="759.20,335.60 927.20,335.60 927.20,268.40 759.20,268.40 759.20,297.20 797.60,297.20 797.60,311.60 759.20,311.60" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="759.20,446.00 912.80,446.00 912.80,364.40 860.00,364.40 860.00,393.20 759.20,393.20" fill="#cbd5dc" stroke="#667987" stroke-width="1.6" stroke-linejoin="round"/>
+<line x1="716.00" y1="590.00" x2="768.80" y2="532.40" stroke="#244e70" stroke-width="2.6" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="7 6"/>
+<line x1="855.20" y1="532.40" x2="1114.40" y2="537.20" stroke="#244e70" stroke-width="2.6" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="7 6"/>
+<line x1="1138.40" y1="494.00" x2="1138.40" y2="431.60" stroke="#244e70" stroke-width="2.6" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="7 6"/>
+<line x1="1138.40" y1="369.20" x2="1138.40" y2="297.20" stroke="#244e70" stroke-width="2.6" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="7 6"/>
+<line x1="1032.80" y1="297.20" x2="908.00" y2="287.60" stroke="#244e70" stroke-width="2.6" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="7 6"/>
+<line x1="778.40" y1="287.60" x2="845.60" y2="407.60" stroke="#244e70" stroke-width="2.6" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="7 6"/>
+<line x1="783.20" y1="426.80" x2="716.00" y2="590.00" stroke="#244e70" stroke-width="2.6" stroke-linecap="round" marker-end="url(#travel_arrow)" stroke-dasharray="7 6"/>
+<line x1="768.80" y1="532.40" x2="855.20" y2="532.40" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<line x1="794.72" y1="532.40" x2="827.55" y2="532.40" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<circle cx="768.80" cy="532.40" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="855.20" cy="532.40" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<rect x="776.80" y="493.40" width="80" height="28" rx="7" fill="#ffffff" stroke="#c4d1db"/>
+<text x="816.8" y="514.4" font-size="18" fill="#17394b" font-weight="bold" text-anchor="middle">1 · M1</text>
+<line x1="1114.40" y1="537.20" x2="1138.40" y2="494.00" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<line x1="1121.60" y1="524.24" x2="1130.72" y2="507.82" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<circle cx="1114.40" cy="537.20" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="1138.40" cy="494.00" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<rect x="1007.20" y="498.20" width="80" height="28" rx="7" fill="#ffffff" stroke="#c4d1db"/>
+<text x="1047.2" y="519.2" font-size="18" fill="#17394b" font-weight="bold" text-anchor="middle">2 · M2</text>
+<line x1="1138.40" y1="431.60" x2="1138.40" y2="369.20" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<line x1="1138.40" y1="412.88" x2="1138.40" y2="389.17" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<circle cx="1138.40" cy="431.60" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="1138.40" cy="369.20" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<rect x="1026.40" y="402.20" width="80" height="28" rx="7" fill="#ffffff" stroke="#c4d1db"/>
+<text x="1066.4" y="423.20000000000005" font-size="18" fill="#17394b" font-weight="bold" text-anchor="middle">3 · M3</text>
+<line x1="1138.40" y1="297.20" x2="1032.80" y2="297.20" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<line x1="1106.72" y1="297.20" x2="1066.59" y2="297.20" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<circle cx="1138.40" cy="297.20" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="1032.80" cy="297.20" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<rect x="1040.80" y="306.20" width="80" height="28" rx="7" fill="#ffffff" stroke="#c4d1db"/>
+<text x="1080.8" y="327.2" font-size="18" fill="#17394b" font-weight="bold" text-anchor="middle">4 · M4</text>
+<line x1="908.00" y1="287.60" x2="778.40" y2="287.60" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<line x1="869.12" y1="287.60" x2="819.87" y2="287.60" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<circle cx="908.00" cy="287.60" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="778.40" cy="287.60" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<rect x="815.20" y="306.20" width="80" height="28" rx="7" fill="#ffffff" stroke="#c4d1db"/>
+<text x="855.2" y="327.2" font-size="18" fill="#17394b" font-weight="bold" text-anchor="middle">5 · M5</text>
+<line x1="845.60" y1="407.60" x2="783.20" y2="426.80" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round"/>
+<line x1="826.88" y1="413.36" x2="803.17" y2="420.66" stroke="#d45e47" stroke-width="4.2" stroke-linecap="round" marker-end="url(#mark_arrow)"/>
+<circle cx="845.60" cy="407.60" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<circle cx="783.20" cy="426.80" r="4.6" fill="#ffffff" stroke="#d45e47" stroke-width="2.2"/>
+<rect x="844.00" y="363.80" width="80" height="28" rx="7" fill="#ffffff" stroke="#c4d1db"/>
+<text x="884.0" y="384.8" font-size="18" fill="#17394b" font-weight="bold" text-anchor="middle">6 · M6</text>
+<circle cx="716.0" cy="590.0" r="9" fill="#244e70"/>
+<text x="732.0" y="616.0" font-size="18" fill="#244e70" font-weight="normal" text-anchor="start">Origin</text>
+<text x="32" y="703" font-size="20" fill="#17394b" font-weight="bold" text-anchor="start">Visit order</text>
+<text x="32" y="751" font-size="20" fill="#17394b" font-weight="bold" text-anchor="start">Directions</text>
+<rect x="205" y="681" width="63" height="31" rx="7" fill="#e5edf3"/>
+<text x="236.5" y="704" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M1</text>
+<text x="289" y="704" font-size="24" fill="#667987" font-weight="normal" text-anchor="middle">→</text>
+<text x="236.5" y="751" font-size="22" fill="#17394b" font-weight="bold" text-anchor="middle">0</text>
+<rect x="310" y="681" width="63" height="31" rx="7" fill="#e5edf3"/>
+<text x="341.5" y="704" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M2</text>
+<text x="394" y="704" font-size="24" fill="#667987" font-weight="normal" text-anchor="middle">→</text>
+<text x="341.5" y="751" font-size="22" fill="#17394b" font-weight="bold" text-anchor="middle">0</text>
+<rect x="415" y="681" width="63" height="31" rx="7" fill="#e5edf3"/>
+<text x="446.5" y="704" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M3</text>
+<text x="499" y="704" font-size="24" fill="#667987" font-weight="normal" text-anchor="middle">→</text>
+<text x="446.5" y="751" font-size="22" fill="#17394b" font-weight="bold" text-anchor="middle">0</text>
+<rect x="520" y="681" width="63" height="31" rx="7" fill="#e5edf3"/>
+<text x="551.5" y="704" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M4</text>
+<text x="604" y="704" font-size="24" fill="#667987" font-weight="normal" text-anchor="middle">→</text>
+<text x="551.5" y="751" font-size="22" fill="#17394b" font-weight="bold" text-anchor="middle">1</text>
+<rect x="625" y="681" width="63" height="31" rx="7" fill="#e5edf3"/>
+<text x="656.5" y="704" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M5</text>
+<text x="709" y="704" font-size="24" fill="#667987" font-weight="normal" text-anchor="middle">→</text>
+<text x="656.5" y="751" font-size="22" fill="#17394b" font-weight="bold" text-anchor="middle">1</text>
+<rect x="730" y="681" width="63" height="31" rx="7" fill="#e5edf3"/>
+<text x="761.5" y="704" font-size="20" fill="#17394b" font-weight="bold" text-anchor="middle">M6</text>
+<text x="761.5" y="751" font-size="22" fill="#17394b" font-weight="bold" text-anchor="middle">1</text>
+<text x="32" y="790" font-size="18" fill="#586d7b" font-weight="normal" text-anchor="start">Direction 0: A → B    ·    Direction 1: B → A</text>
+<line x1="915" y1="693" x2="960" y2="693" stroke="#d45e47" stroke-width="4"/>
+<text x="975" y="700" font-size="20" fill="#17394b" font-weight="normal" text-anchor="start">Marking (fixed)</text>
+<line x1="915" y1="735" x2="960" y2="735" stroke="#244e70" stroke-width="2.6" stroke-dasharray="7 6" marker-end="url(#travel_arrow)"/>
+<text x="975" y="742" font-size="20" fill="#17394b" font-weight="normal" text-anchor="start">Travel (objective)</text>
+<text x="1248" y="790" font-size="17" fill="#586d7b" font-weight="normal" text-anchor="end">Synthetic layout · Illustrative route</text>
+</g>
+</svg>

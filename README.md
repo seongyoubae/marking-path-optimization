@@ -34,10 +34,6 @@ Each part has two endpoints. The tool enters through one endpoint and finishes a
 
 The part coordinates are fixed inputs. The optimizer selects the route; it does not generate a nesting layout, move parts, enforce collision constraints or model machine acceleration.
 
-![Paired endpoints and travel legs on synthetic geometry](assets/problem.svg)
-
-*Synthetic nesting-style schematic: fixed marking segments on the left, one selected visit order and direction on the right. Coral arrows show marking; dashed blue arrows show the travel scored by the objective. Part outlines provide visual context only. This is an illustrative route, not a measured optimization result.*
-
 ## Solution Representation
 
 For `n` parts, a discrete candidate contains `2*n` integers:

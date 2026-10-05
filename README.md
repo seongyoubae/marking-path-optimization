@@ -26,21 +26,21 @@ This project treats those two decisions as a joint optimization problem. The rep
 
 ## Problem Definition
 
-Each part has two endpoints. The tool enters through one endpoint and finishes at its paired endpoint. A feasible route must:
+Each route item has two endpoints. The tool enters through one endpoint and finishes at its paired endpoint. A feasible route must:
 
-- Visit every part exactly once.
+- Visit every paired-endpoint item exactly once.
 - Select one of two processing directions for each visit.
 - Start and finish at the specified origin.
 
-The part coordinates are fixed inputs. The optimizer selects the route; it does not generate a nesting layout, move parts, enforce collision constraints or model machine acceleration.
+The endpoint coordinates are fixed inputs. The optimizer selects the route; it does not generate a nesting layout, move parts, enforce collision constraints or model machine acceleration.
 
 ![Marking operations, paired endpoints and travel route](assets/problem.svg)
 
-*Shipbuilding-style synthetic parts with one paired-endpoint marking stroke per part. Red arrows show marking; dashed arrows show the travel objective. Figure IDs start at 1; the Python API uses zero-based IDs.*
+*Redrawn from the supplied marking example. Numbered red segments are marking operations; dashed arrows connect their endpoints, including approach and return. Coordinates and the route are illustrative. Figure IDs start at 1; the Python API uses zero-based IDs.*
 
 ## Solution Representation
 
-For `n` parts, a discrete candidate contains `2*n` integers:
+For `n` paired-endpoint route items (called parts in the code), a discrete candidate contains `2*n` integers:
 
 ```text
 sequence  = [2, 0, 1]  # a permutation of zero-based part IDs

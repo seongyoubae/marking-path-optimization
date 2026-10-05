@@ -1,4 +1,4 @@
-"""Draw a public, paired-endpoint marking-route schematic as an SVG."""
+"""Draw a readable synthetic marking route on shipbuilding-style plate parts."""
 
 import argparse
 from pathlib import Path
@@ -8,69 +8,71 @@ import numpy as np
 
 from src.problem import Problem, validate_solution
 
-# Independent illustrative coordinates, not a traced production dataset.
-# Endpoints are in an arbitrary 100 x 64 sheet coordinate system.
-ENDPOINTS = [
-    (1, 3),
-    (8, 3),
-    (4, 23),
-    (21, 23),
-    (4, 42),
-    (22, 42),
-    (10, 61),
-    (10, 44),
-    (22, 43),
-    (39, 61),
-    (42, 60),
-    (47, 58),
-    (47, 57),
-    (47, 53),
-    (53, 57),
-    (53, 53),
-    (58, 60),
-    (53, 58),
-    (62, 61),
-    (78, 43),
-    (90, 61),
-    (90, 44),
-    (76, 42),
-    (96, 42),
-    (80, 23),
-    (96, 23),
-    (99, 5),
-    (92, 5),
+# Independently designed example geometry in arbitrary sheet units.
+# One reversible marking stroke represents each operation; shapes are visual context.
+PARTS = [
+    {
+        "kind": "bracket",
+        "outline": "M4,5 L32,5 Q28,9 25,13 L10,27 L4,27 L4,9 Q8,9 8,5 Z",
+        "holes": ["M15,14 A3,3 0 1 0 9,14 A3,3 0 1 0 15,14 Z"],
+        "endpoints": [(11, 9), (23, 9)],
+        "label": (9, 21),
+    },
+    {
+        "kind": "web_plate",
+        "outline": "M4,31 L10,31 L10,34 Q12,36 14,34 L14,31 L23,31 L23,34 "
+        "Q25,36 27,34 L27,31 L36,31 L34,48 L9,48 L4,43 Z",
+        "holes": ["M15,39 L26,39 A3,3 0 0 1 26,45 L15,45 A3,3 0 0 1 15,39 Z"],
+        "endpoints": [(32, 34), (32, 45)],
+        "label": (8, 39),
+    },
+    {
+        "kind": "tapered_web_strip",
+        "outline": "M4,53 L49,53 L52,56 L52,62 L7,62 L4,59 Z",
+        "holes": [],
+        "endpoints": [(12, 56), (44, 56)],
+        "label": (8, 59),
+    },
+    {
+        "kind": "web_plate",
+        "outline": "M55,47 L59,42 L64,42 L64,45 Q66,47 68,45 L68,42 "
+        "L77,42 L77,45 Q79,47 81,45 L81,42 L90,42 L90,62 L59,62 L55,56 Z",
+        "holes": ["M67,51 L80,51 A3,3 0 0 1 80,57 L67,57 A3,3 0 0 1 67,51 Z"],
+        "endpoints": [(60, 49), (86, 49)],
+        "label": (59.5, 57),
+    },
+    {
+        "kind": "bracket",
+        "outline": "M94,62 L116,62 L116,43 L110,43 L95,56 Q94,58 94,62 Z",
+        "holes": ["M112,55 A3,3 0 1 0 106,55 A3,3 0 1 0 112,55 Z"],
+        "endpoints": [(98, 60), (114, 60)],
+        "label": (108, 49),
+    },
+    {
+        "kind": "bracket",
+        "outline": "M88,38 L116,38 L116,18 L110,18 L95,31 Q88,34 88,38 Z",
+        "holes": ["M112,30 A3,3 0 1 0 106,30 A3,3 0 1 0 112,30 Z"],
+        "endpoints": [(95, 35), (112, 35)],
+        "label": (113, 23),
+    },
+    {
+        "kind": "tapered_web_plate",
+        "outline": "M39,26 L80,26 L80,38 L69,38 L44,34 L39,30 Z",
+        "holes": ["M52,30 L66,30 A1.5,1.5 0 0 1 66,33 L52,33 A1.5,1.5 0 0 1 52,30 Z"],
+        "endpoints": [(45, 28), (74, 28)],
+        "label": (75, 34.5),
+    },
+    {
+        "kind": "floor_plate",
+        "outline": "M38,4 L43,4 L43,7 Q45,9 47,7 L47,4 L58,4 L58,7 "
+        "Q60,9 62,7 L62,4 L73,4 L73,7 Q75,9 77,7 L77,4 L83,4 L83,22 L38,22 Z",
+        "holes": ["M53,14 L68,14 A2.5,2.5 0 0 1 68,19 L53,19 A2.5,2.5 0 0 1 53,14 Z"],
+        "endpoints": [(41, 11), (80, 11)],
+        "label": (43, 18),
+    },
 ]
-DIRECTIONS = [0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0]
-SOLUTION = list(range(14)) + DIRECTIONS
-LABELS = [
-    (5, 7),
-    (13, 27),
-    (14, 38),
-    (6, 54),
-    (27, 54),
-    (41, 63),
-    (42, 54),
-    (58, 54),
-    (57, 63),
-    (76, 54),
-    (96, 54),
-    (86, 38),
-    (88, 27),
-    (93, 10),
-]
-# Decorative nesting contours: no collision or nesting constraints are modeled.
-CONTOURS = [
-    "M 12,54 Q 12,59 17,59 L 25,59 Q 29,59 29,54 L 28,51 L 13,51 Z",
-    "M 71,54 Q 71,59 76,59 L 84,59 Q 88,59 88,54 L 87,51 L 72,51 Z",
-    "M 26,46 L 43,46 L 39,35 L 31,35 L 31,39 L 29,39 Q 26,34 26,39 Z",
-    "M 57,46 L 74,46 L 74,39 Q 74,34 71,39 L 66,39 L 63,35 Z",
-    "M 21,27 L 35,27 L 31,16 L 26,16 L 26,21 L 24,21 Q 21,16 21,21 Z",
-    "M 64,27 L 79,27 L 79,21 Q 79,16 76,21 L 70,21 L 72,16 L 68,16 Z",
-    "M 29,3 L 45,43 L 51,49 L 41,15 Z",
-    "M 43,3 L 54,29 L 58,33 L 52,10 Z",
-    "M 0,0 L 28,0 L 34,16 L 20,16 L 17,3 Z",
-    "M 72,0 L 100,0 L 100,3 L 82,3 L 77,16 L 67,16 Z",
-]
+ENDPOINTS = [p for part in PARTS for p in part["endpoints"]]
+SOLUTION = list(range(len(PARTS))) + [0, 0, 0, 0, 0, 1, 1, 1]
 
 
 def schematic_problem():
@@ -81,35 +83,37 @@ def schematic_problem():
 def render_schematic():
     problem = schematic_problem()
     sequence, direction = validate_solution(problem, SOLUTION)
-    navy, muted, coral = "#173746", "#536774", "#cb4439"
+    navy, muted, coral = "#153746", "#536a78", "#c93f35"
     elements = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1070" '
-        'viewBox="0 0 1440 1070" role="img" aria-labelledby="title desc">',
-        '<title id="title">Marking path: visit order and reversible direction</title>',
-        '<desc id="desc">Fourteen red marking segments on an illustrative nested sheet. '
-        "Dashed navy arrows connect the origin to each entry, each exit to the next entry, "
-        "and the final exit to the origin. White numbered discs identify marking operations. "
-        "The route is manually selected and is not an optimization result.</desc>",
-        '<defs><marker id="travel_arrow" markerWidth="12" markerHeight="12" refX="11" '
-        'refY="6" orient="auto" markerUnits="userSpaceOnUse">'
-        '<path d="M1,1 L11,6 L1,11" fill="none" stroke="#173746" stroke-width="2"/>'
-        '</marker><marker id="mark_arrow" markerWidth="12" markerHeight="12" refX="10" '
-        'refY="6" orient="auto" markerUnits="userSpaceOnUse">'
-        '<path d="M0,0 L12,6 L0,12 Z" fill="#cb4439"/></marker></defs>',
-        '<rect width="1440" height="1070" fill="#ffffff"/>',
+        '<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1110" '
+        'viewBox="0 0 1280 1110" role="img" aria-labelledby="title desc">',
+        '<title id="title">Marking route on shipbuilding-style parts</title>',
+        '<desc id="desc">Eight independently designed synthetic plate parts: brackets, '
+        "web plates, tapered strips and a floor plate, with rounded openings and edge cutouts. "
+        "Red arrows represent reversible marking strokes inside each part. Dashed navy "
+        "arrows connect the origin, selected entries and exits, and return to the origin. "
+        "Operation IDs are numbered from one. This manually selected route illustrates "
+        "the paired-endpoint model; part outlines are not collision constraints.</desc>",
+        '<defs><marker id="travel_arrow" markerWidth="15" markerHeight="15" refX="13" '
+        'refY="7.5" orient="auto" markerUnits="userSpaceOnUse">'
+        '<path d="M2,2 L13,7.5 L2,13" fill="none" stroke="#153746" stroke-width="2.5"/>'
+        '</marker><marker id="mark_arrow" markerWidth="16" markerHeight="16" refX="14" '
+        'refY="8" orient="auto" markerUnits="userSpaceOnUse">'
+        '<path d="M1,1 L15,8 L1,15 Z" fill="#c93f35"/></marker></defs>',
+        '<rect width="1280" height="1110" fill="#fff"/>',
         '<g font-family="Arial, Helvetica, sans-serif">',
     ]
 
-    def text(x, y, value, size=23, color=navy, weight="normal", anchor="start"):
+    def text(x, y, value, size=30, color=navy, weight="normal", anchor="start"):
         elements.append(
             f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" '
             f'font-weight="{weight}" text-anchor="{anchor}">{escape(str(value))}</text>'
         )
 
-    def line(a, b, color, width=3, arrow=None, dashed=False, halo=False):
+    def line(a, b, color, width=3.4, arrow=None, dashed=False, halo=False):
         extra = f' marker-end="url(#{arrow})"' if arrow else ""
         if dashed:
-            extra += ' stroke-dasharray="9 7"'
+            extra += ' stroke-dasharray="12 9"'
         coords = f'x1="{a[0]:.2f}" y1="{a[1]:.2f}" x2="{b[0]:.2f}" y2="{b[1]:.2f}"'
         if halo:
             elements.append(f'<line {coords} stroke="#fff" stroke-width="{width + 3}"/>')
@@ -119,98 +123,73 @@ def render_schematic():
         )
 
     def point(p):
-        return 65 + 9.2 * float(p[0]), 775 - 9.2 * float(p[1])
+        return 60 + 9.6 * float(p[0]), 815 - 9.6 * float(p[1])
 
-    text(48, 60, "Marking path optimization", 39, weight="bold")
-    text(48, 101, "Fixed layout. Variable visit order and processing direction.", 25, muted)
-    elements.append('<line x1="48" y1="126" x2="1392" y2="126" stroke="#d8dfe3"/>')
-    text(48, 166, "A route through 14 marking operations", 27, weight="bold")
+    text(48, 61, "Marking path optimization", 44, weight="bold")
+    text(48, 109, "Choose the visit order and direction on a fixed plate layout.", 30, muted)
+    line((51, 164), (119, 164), coral, 5, "mark_arrow")
+    text(137, 175, "Marking stroke", 31, weight="bold")
+    line((510, 164), (578, 164), navy, 3.4, "travel_arrow", dashed=True)
+    text(596, 175, "Travel to minimize", 31, weight="bold")
     elements.append(
-        '<rect x="65" y="186.2" width="920" height="588.8" '
-        'fill="#e1e4e6" stroke="#637680" stroke-width="2"/>'
+        '<rect x="60" y="200.6" width="1152" height="614.4" '
+        'fill="#f5f7f8" stroke="#677e8b" stroke-width="2.4"/>'
     )
-    for contour in CONTOURS:
+    for part in PARTS:
+        shape = " ".join([part["outline"], *part["holes"]])
         elements.append(
-            f'<path d="{contour}" transform="translate(65 775) scale(9.2 -9.2)" '
-            'fill="#fff" stroke="#637680" stroke-width="0.2" stroke-linejoin="round"/>'
-        )
-    for center in [(24, 8), (75, 8)]:
-        x, y = point(center)
-        elements.append(
-            f'<circle cx="{x}" cy="{y}" r="10" fill="#fff" stroke="#637680" stroke-width="2"/>'
+            f'<path d="{shape}" transform="translate(60 815) scale(9.6 -9.6)" '
+            'fill="#dce4e9" fill-rule="evenodd" stroke="#435f6f" '
+            'stroke-width="0.25" stroke-linejoin="round"/>'
         )
 
     selected = 2 * sequence + direction
     entries, exits = problem.coords[selected], problem.coords_paired[selected]
     for a, b in zip(np.vstack([problem.origin, exits]), np.vstack([entries, problem.origin])):
-        # Shorten the connector at its target so the marking entry remains visible.
         pa, pb = np.asarray(point(a)), np.asarray(point(b))
         distance = np.linalg.norm(pb - pa)
-        end = pb - (pb - pa) * min(7 / distance, 0.25)
-        line(pa, end, navy, 2.7, "travel_arrow", dashed=True, halo=True)
-
-    for part in range(problem.num_parts):
-        a, b = point(entries[part]), point(exits[part])
-        line(a, b, coral, 4.2, "mark_arrow", halo=True)
-        elements.append(f'<circle cx="{a[0]}" cy="{a[1]}" r="4.5" fill="{coral}"/>')
-        lx, ly = point(LABELS[part])
+        end = pb - (pb - pa) * min(9 / distance, 0.25)
+        line(pa, end, navy, 3.4, "travel_arrow", dashed=True, halo=True)
+    for visit, part_id in enumerate(sequence):
+        a, b = point(entries[visit]), point(exits[visit])
+        line(a, b, coral, 5, "mark_arrow", halo=True)
+        elements.append(f'<circle cx="{a[0]}" cy="{a[1]}" r="5" fill="{coral}"/>')
+        lx, ly = point(PARTS[int(part_id)]["label"])
         elements.append(
-            f'<circle cx="{lx}" cy="{ly}" r="18" fill="#fff" stroke="#a9b7be" stroke-width="1.3"/>'
+            f'<circle cx="{lx}" cy="{ly}" r="23" fill="#fff" stroke="#8aa0ad" stroke-width="1.5"/>'
         )
-        text(lx, ly + 7, part + 1, 22, navy, "bold", "middle")
+        text(lx, ly + 11, int(part_id) + 1, 31, weight="bold", anchor="middle")
 
     ox, oy = point(problem.origin)
-    elements.append(f'<circle cx="{ox}" cy="{oy}" r="8" fill="{navy}"/>')
-    text(65, 812, "O  ·  start / return", 23, weight="bold")
-    text(985, 812, "White contours: illustrative part layout", 21, muted, anchor="end")
+    elements.append(f'<circle cx="{ox}" cy="{oy}" r="9" fill="{navy}"/>')
+    text(60, 859, "O  ·  start / return", 30, weight="bold")
+    text(1212, 859, "Brackets · Web plates · Floor plate", 29, muted, anchor="end")
+    elements.append('<line x1="48" y1="886" x2="1232" y2="886" stroke="#d7e0e5"/>')
+    text(48, 931, "Reversible direction", 32, weight="bold")
+    for row, bit in enumerate([0, 1]):
+        y = 982 + row * 58
+        text(60, y, bit, 31, weight="bold")
+        text(119, y, "A", 30)
+        text(354, y, "B", 30, anchor="end")
+        start, end = ((157, y - 10), (313, y - 10))
+        if bit:
+            start, end = end, start
+        line(start, end, coral, 5, "mark_arrow")
 
-    elements.append('<line x1="1025" y1="160" x2="1025" y2="814" stroke="#d8dfe3"/>')
-    text(1060, 174, "Read the route", 27, weight="bold")
-    line((1062, 216), (1122, 216), coral, 4.2, "mark_arrow")
-    text(1140, 224, "Marking stroke", 23)
-    line((1062, 259), (1122, 259), navy, 2.7, "travel_arrow", dashed=True)
-    text(1140, 267, "Travel between strokes", 22)
-    elements.append('<circle cx="1079" cy="310" r="18" fill="#fff" stroke="#a9b7be"/>')
-    text(1079, 318, "3", 22, weight="bold", anchor="middle")
-    text(1111, 318, "Marking operation ID", 22)
-
-    text(1060, 389, "Two endpoints, two directions", 24, weight="bold")
-    text(1060, 427, "0", 24, weight="bold")
-    text(1110, 427, "A", 23)
-    text(1350, 427, "B", 23, anchor="end")
-    line((1118, 450), (1337, 450), coral, 4.2, "mark_arrow")
-    text(1060, 498, "1", 24, weight="bold")
-    text(1110, 498, "A", 23)
-    text(1350, 498, "B", 23, anchor="end")
-    line((1337, 521), (1118, 521), coral, 4.2, "mark_arrow")
-    text(1060, 570, "The selected endpoint is the entry;", 21, muted)
-    text(1060, 601, "its paired endpoint is the exit.", 21, muted)
-
-    text(1060, 665, "What the optimizer changes", 24, weight="bold")
-    text(1060, 704, "Sequence + direction bits", 24)
-    text(1060, 749, "Objective: dashed travel only", 23, weight="bold")
-    text(1060, 780, "Marking length stays fixed.", 21, muted)
-
-    elements.append('<line x1="48" y1="840" x2="1392" y2="840" stroke="#d8dfe3"/>')
-    text(48, 883, "Example solution", 25, weight="bold")
-    text(275, 883, "Each column is one visit: operation ID above, direction bit below.", 23, muted)
-    text(48, 935, "Sequence", 22, weight="bold")
-    text(48, 988, "Direction", 22, weight="bold")
-    for rank, (part, bit) in enumerate(zip(sequence, direction)):
-        x = 224 + 83 * rank
+    text(455, 931, "Example solution", 32, weight="bold")
+    text(455, 984, "Order", 30, weight="bold")
+    text(455, 1042, "Dir.", 30, weight="bold")
+    for visit, (part_id, bit) in enumerate(zip(sequence, direction)):
+        x = 629 + 77 * visit
         elements.append(
-            f'<rect x="{x - 28}" y="906" width="56" height="40" rx="5" fill="#edf1f3"/>'
+            f'<rect x="{x - 27}" y="950" width="54" height="47" rx="5" fill="#edf2f5"/>'
         )
-        text(x, 935, int(part) + 1, 24, weight="bold", anchor="middle")
-        text(x, 988, int(bit), 24, weight="bold", anchor="middle")
-        if rank < problem.num_parts - 1:
-            text(x + 42, 935, "→", 23, muted, anchor="middle")
+        text(x, 984, int(part_id) + 1, 31, weight="bold", anchor="middle")
+        text(x, 1042, int(bit), 31, weight="bold", anchor="middle")
+        if visit < problem.num_parts - 1:
+            text(x + 39, 984, "→", 28, muted, anchor="middle")
     text(
-        48,
-        1040,
-        "Synthetic schematic · Manually selected route · No collision constraints",
-        21,
-        muted,
+        48, 1092, "Synthetic geometry · Illustrative route · Marking length stays fixed", 27, muted
     )
     elements.extend(["</g>", "</svg>"])
     return "\n".join(elements) + "\n"

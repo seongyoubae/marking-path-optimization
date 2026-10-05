@@ -36,7 +36,7 @@ The part coordinates are fixed inputs. The optimizer selects the route; it does 
 
 ![Marking operations, paired endpoints and travel route](assets/problem.svg)
 
-*Illustrative route on synthetic geometry. Red arrows show marking strokes; dashed arrows show the travel objective. Figure IDs start at 1; the Python API uses zero-based IDs.*
+*Shipbuilding-style synthetic parts with one paired-endpoint marking stroke per part. Red arrows show marking; dashed arrows show the travel objective. Figure IDs start at 1; the Python API uses zero-based IDs.*
 
 ## Solution Representation
 

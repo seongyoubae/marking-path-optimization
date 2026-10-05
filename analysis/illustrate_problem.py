@@ -64,6 +64,15 @@ PARTS = [
 ]
 
 
+# Color groups link each contour to its operation labels and visit-table cells.
+PART_PALETTE = [
+    ("#d5eae6", "#547e77"),
+    ("#d8e6f5", "#5b7ba3"),
+    ("#e4def1", "#837299"),
+    ("#e1ebd6", "#74855c"),
+]
+
+
 def schematic_problem():
     coords = np.asarray(ENDPOINTS, dtype=float)
     return Problem([0, 0], coords, coords[np.arange(len(coords)) ^ 1], "synthetic_schematic")
@@ -72,7 +81,12 @@ def schematic_problem():
 def render_schematic():
     problem = schematic_problem()
     sequence, direction = validate_solution(problem, SOLUTION)
-    navy, muted, coral = "#153746", "#536a78", "#c93f35"
+    navy, muted, coral, travel_color = "#153746", "#536a78", "#d04b40", "#275b9b"
+    operation_palette = {
+        operation: PART_PALETTE[index]
+        for index, part in enumerate(PARTS)
+        for operation in part["operations"]
+    }
     elements = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1110" '
         'viewBox="0 0 1280 1110" role="img" aria-labelledby="title desc">',
@@ -81,14 +95,15 @@ def render_schematic():
         "shipbuilding-style contours. Two larger parts each contain three marking operations; "
         "two smaller brackets each contain one. Eight numbered red strokes have reversible "
         "paired endpoints. Dashed connectors show the origin approach, transfers and return. "
+        "Contour colors are repeated in the operation badges and order-table cells. "
         "The example order ends with operation eight followed by operation seven. Coordinates "
         "and route are illustrative. Contours are not collision constraints.</desc>",
         '<defs><marker id="travel_arrow" markerWidth="15" markerHeight="15" refX="13" '
         'refY="7.5" orient="auto" markerUnits="userSpaceOnUse">'
-        '<path d="M2,2 L13,7.5 L2,13" fill="none" stroke="#153746" stroke-width="2.5"/>'
+        '<path d="M2,2 L13,7.5 L2,13" fill="none" stroke="#275b9b" stroke-width="2.5"/>'
         '</marker><marker id="mark_arrow" markerWidth="16" markerHeight="16" refX="14" '
         'refY="8" orient="auto" markerUnits="userSpaceOnUse">'
-        '<path d="M1,1 L15,8 L1,15 Z" fill="#c93f35"/></marker></defs>',
+        '<path d="M1,1 L15,8 L1,15 Z" fill="#d04b40"/></marker></defs>',
         '<rect width="1280" height="1110" fill="#fff"/>',
         '<g font-family="Arial, Helvetica, sans-serif">',
     ]
@@ -117,18 +132,19 @@ def render_schematic():
     text(48, 61, "Marking path optimization", 44, weight="bold")
     text(48, 109, "Optimize the travel between marking operations.", 30, muted)
     line((51, 164), (119, 164), coral, 5.5, "mark_arrow")
-    text(137, 175, "Marking", 31, weight="bold")
-    line((510, 164), (578, 164), navy, 3.8, "travel_arrow", dashed=True)
-    text(596, 175, "Travel to minimize", 31, weight="bold")
+    text(137, 175, "Marking", 31, coral, weight="bold")
+    line((510, 164), (578, 164), travel_color, 3.8, "travel_arrow", dashed=True)
+    text(596, 175, "Travel to minimize", 31, travel_color, weight="bold")
     elements.append(
         '<rect x="60" y="200.6" width="1152" height="614.4" '
         'fill="#f5f7f8" stroke="#677e8b" stroke-width="2.4"/>'
     )
-    for part in PARTS:
+    for index, part in enumerate(PARTS):
+        fill, border = PART_PALETTE[index]
         shape = " ".join([part["outline"], *part["holes"]])
         elements.append(
             f'<path d="{shape}" transform="translate(60 815) scale(9.6 -9.6)" '
-            'fill="#dce4e9" fill-rule="evenodd" stroke="#435f6f" '
+            f'fill="{fill}" fill-rule="evenodd" stroke="{border}" '
             'stroke-width="0.25" stroke-linejoin="round"/>'
         )
 
@@ -142,7 +158,16 @@ def render_schematic():
         end = pb - (pb - pa) * min(9 / distance, 0.2)
         # Tiny transitions have no arrowhead, avoiding a pile-up at adjacent endpoints.
         marker = "travel_arrow" if distance >= 22 else None
-        line(pa, end, navy, 3.8, marker, dashed=True, halo=True, attrs=f' data-travel-leg="{leg}"')
+        line(
+            pa,
+            end,
+            travel_color,
+            3.8,
+            marker,
+            dashed=True,
+            halo=True,
+            attrs=f' data-travel-leg="{leg}"',
+        )
     for visit, operation in enumerate(sequence):
         a, b = point(entries[visit]), point(exits[visit])
         line(
@@ -156,6 +181,7 @@ def render_schematic():
         )
         elements.append(f'<circle cx="{a[0]}" cy="{a[1]}" r="5" fill="{coral}"/>')
         lx, ly = point(LABELS[int(operation)])
+        label_fill, label_border = operation_palette[int(operation)]
         # Short callouts tie operation IDs to their strokes, without covering the strokes.
         label = np.asarray([lx, ly])
         stroke_start, stroke_end = np.asarray(a), np.asarray(b)
@@ -167,13 +193,14 @@ def render_schematic():
         if clearance > 31:
             line(label + offset * (26 / clearance), closest, "#738995", 1.6)
         elements.append(
-            f'<circle cx="{lx}" cy="{ly}" r="24" fill="#fff" stroke="#8aa0ad" stroke-width="1.5"/>'
+            f'<circle cx="{lx}" cy="{ly}" r="24" fill="{label_fill}" '
+            f'stroke="{label_border}" stroke-width="1.8"/>'
         )
         text(lx, ly + 11, int(operation) + 1, 31, weight="bold", anchor="middle")
 
     ox, oy = point(problem.origin)
-    elements.append(f'<circle cx="{ox}" cy="{oy}" r="9" fill="{navy}"/>')
-    text(60, 859, "O  ·  start / return", 30, weight="bold")
+    elements.append(f'<circle cx="{ox}" cy="{oy}" r="9" fill="{travel_color}"/>')
+    text(60, 859, "O  ·  start / return", 30, travel_color, weight="bold")
     text(1212, 859, "Four parts · Eight marking operations", 29, muted, anchor="end")
     elements.append('<line x1="48" y1="886" x2="1232" y2="886" stroke="#d7e0e5"/>')
     text(48, 931, "Reversible direction", 32, weight="bold")
@@ -191,8 +218,10 @@ def render_schematic():
     text(455, 1042, "Dir.", 30, weight="bold")
     for visit, (operation, bit) in enumerate(zip(sequence, direction)):
         x = 629 + 77 * visit
+        cell_fill, cell_border = operation_palette[int(operation)]
         elements.append(
-            f'<rect x="{x - 27}" y="950" width="54" height="47" rx="5" fill="#edf2f5"/>'
+            f'<rect x="{x - 27}" y="950" width="54" height="47" rx="5" '
+            f'fill="{cell_fill}" stroke="{cell_border}" stroke-width="1.3"/>'
         )
         text(x, 984, int(operation) + 1, 31, weight="bold", anchor="middle")
         text(x, 1042, int(bit), 31, weight="bold", anchor="middle")
